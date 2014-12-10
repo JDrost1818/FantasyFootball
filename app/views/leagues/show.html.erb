@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @league.description %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @league.name %>
+</p>
+
+<p>
+  <strong>Salary cap:</strong>
+  <%= @league.salary_cap %>
+</p>
+
+<%= link_to 'Edit', edit_league_path(@league) %> |
+<%= link_to 'Back', leagues_path %>
