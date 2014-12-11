@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20141210235718) do
   end
 
   create_table "teams", force: true do |t|
+    t.integer  "user_id"
     t.string   "name"
     t.integer  "total_salary"
     t.datetime "created_at"

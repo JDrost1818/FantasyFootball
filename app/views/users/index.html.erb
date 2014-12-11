@@ -9,7 +9,7 @@
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
+    <% current_user.teams.each do |user| %>
       <tr>
         <td><%= user.full_name %></td>
         <td><%= link_to 'Show', user %></td>
