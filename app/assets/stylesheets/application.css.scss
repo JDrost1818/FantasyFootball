@@ -1,5 +1,29 @@
 @import "bootstrap-sprockets";
 @import "bootswatch/sandstone/variables";
 @import "bootstrap";
-body { padding-top: 60px; }
+body { padding-top: 60px;
+	   background-color: #93C54A;
+	 }
 @import "bootswatch/sandstone/bootswatch";
+
+.col-md-9 {
+	float: center !important;
+	width: 90%;
+
+}
+.wrapper {
+	height: 93.7vh;
+	background-color: #f0f0f0;
+	min-width: 600px !important;
+
+}
+.trans-color {
+	background-color: transparent;
+	width: 600px;
+	max-width: 90%;
+	min-width: 600px !important;
+}
+
+.custom-table {
+	width: 80%;
+}

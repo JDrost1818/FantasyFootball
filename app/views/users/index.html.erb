@@ -1,13 +1,15 @@
 <%- model_class = User -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => "Welcome " + current_user.first_name %></h1>
+<div class="jumbotron trans-color">
+  <h1 align="center"><%=t '.title', :default => "Welcome " + current_user.first_name + "," %></h1>
+  <p align="center">To get started you can create a league, join a league, or manage teams you have already created.</p>
+  <p align="center"><a class="btn btn-success btn-lg" href="/leagues/new">Create League</a>
+  <a class="btn btn-warning btn-lg" href="/leagues">Join League</a></p>
 </div>
-<table class="table table-striped">
+<table class="table table-striped custom-table">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name("Team Name") %></th>
       <th><%= model_class.human_attribute_name("Record") %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
@@ -15,22 +17,7 @@
       <tr>
         <td><%= link_to team.name, team_path(team) %></td>
         <td><%= team.get_record %></td>
-        <td>
-          <%= link_to team_path(team), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
-            <%= glyph 'info-sign' %>
-          <%- end -%>
-          <%= link_to edit_team_path(team), :class => 'btn btn-xs', :title => "#{ t('.edit', :default => t('helpers.links.edit')) }" do %>
-            <%= glyph 'pencil' %>
-          <%- end -%>
-          <%= link_to team_path(team), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
-            <%= glyph 'remove' %>
-          <%- end -%>
-        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_user_path,
-            :class => 'btn btn-primary' %>

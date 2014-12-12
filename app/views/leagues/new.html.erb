@@ -1,5 +1,6 @@
 <%- model_class = League -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h1>
+<div class="jumbotron trans-color">
+  <h1 align="center"><%=t '.title', :default => "Create League" %></h1>
+  <p align="center">In order to play Fantasy Football, you must join a league. If you can't find a league, simply create one and soon other users will flock to compete.</p>
 </div>
 <%= render :partial => 'form' %>

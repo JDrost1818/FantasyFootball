@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20141210235718) do
     t.string   "description"
     t.string   "name"
     t.integer  "salary_cap"
+    t.boolean  "is_open_for_registration", default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end

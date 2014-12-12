@@ -1,28 +1,28 @@
 <%= form_for @league, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="form-group">
-    <%= f.label :description, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :description, :class => 'text_field form-control' %>
+    <div class="form-group custom-table">
+      <%= f.label :name, :class => 'control-label col-md-2' %>
+      <div class="col-md-10">
+        <%= f.text_field :name, :class => 'text_field form-control' %>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :name, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :name, :class => 'text_field form-control' %>
+    <div class="form-group custom-table">
+      <%= f.label :salary_cap, :class => 'control-label col-md-2' %>
+      <div class="col-md-10">
+        <%= f.text_field :salary_cap, :class => 'text_field form-control' %>
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <%= f.label :salary_cap, :class => 'control-label col-md-2' %>
-    <div class="col-md-10">
-      <%= f.text_field :salary_cap, :class => 'text_field form-control' %>
+    <div class="form-group custom-table">
+      <%= f.label :description, :class => 'control-label col-md-2' %>
+      <div class="col-md-10" align="center">
+        <%= f.text_field :description, :class => 'text_field form-control' %>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <div class='col-md-offset-2 col-md-10'>
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                  leagues_path, :class => 'btn btn-default' %>
+    <div class="form-group custom-table" align="center">
+      <div class='col-md-offset-2 col-md-10'>
+        <%= f.submit nil, :class => 'btn btn-primary' %>
+        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                    leagues_path, :class => 'btn btn-default' %>
+      </div>
     </div>
-  </div>
 <% end %>

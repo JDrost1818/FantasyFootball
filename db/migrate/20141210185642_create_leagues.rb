@@ -4,6 +4,7 @@ class CreateLeagues < ActiveRecord::Migration
       t.string :description
       t.string :name
       t.integer :salary_cap
+      t.boolean :is_open_for_registration, :default => true
 
       t.timestamps
     end
