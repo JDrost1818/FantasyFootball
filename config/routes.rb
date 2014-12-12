@@ -9,10 +9,10 @@ Rails.application.routes.draw do
   resources :teams
 
   resources :leagues
+  get 'leagues/:id/addteam' => 'leagues#addteam'
 
   root "users#index"
 
-  get 'leagues/addteam/:id' => 'leagues#addteam'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

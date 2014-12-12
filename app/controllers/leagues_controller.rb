@@ -21,17 +21,20 @@ class LeaguesController < ApplicationController
   def edit
   end
 
+  def addteam
+  end
+
   # POST /leagues
   # POST /leagues.json
   def create
     @league = League.new(league_params)
+    @league.league_owner_id = current_user.id
     respond_to do |format|
+
       if @league.save
-        puts "\n\n\n\nBye\n\n\n\n"
-        format.html { redirect_to @league, notice: 'League was successfully created.' }
-        format.json { render :show, status: :created, location: @league }
+        format.html { redirect_to :action => "addteam", :id => @league.id }
+        format.json { render :show, status: :created, location: @league.addteam }
       else
-        puts "\n\n\n\n" + @league.save + "\n\n\n\n"
         format.html { render :new }
         format.json { render json: @league.errors, status: :unprocessable_entity }
       end
@@ -60,9 +63,6 @@ class LeaguesController < ApplicationController
       format.html { redirect_to leagues_url, notice: 'League was successfully destroyed.' }
       format.json { head :no_content }
     end
-  end
-
-  def addteam
   end
 
   private

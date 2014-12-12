@@ -7,4 +7,8 @@ class League < ActiveRecord::Base
 	def close_registration
 		is_open_for_registration = false
 	end
+
+	def get_salary_cap
+		(salary_cap / 1000).to_s + "k"
+	end
 end

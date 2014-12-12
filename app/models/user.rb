@@ -7,6 +7,11 @@ class User < ActiveRecord::Base
   has_many :teams
   has_many :leagues, :through => :teams
 
+  def add_team(team)
+  	teams << team
+  	save
+  end
+
   def full_name
    	return first_name + " " + last_name
   end
