@@ -1,29 +1,82 @@
-<%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="form-group">
+    <%= f.label :first_name, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :first_name, :class => 'text_field form-control' %>
     </div>
-  <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :last_name, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :last_name, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :is_admin, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :is_admin, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :email, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :email, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :encrypted_password, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :encrypted_password, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :reset_password_token, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :reset_password_token, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :reset_password_sent_at, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :reset_password_sent_at, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :remember_created_at, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :remember_created_at, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :current_sign_in_at, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :current_sign_in_at, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :last_sign_in_at, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :last_sign_in_at, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :current_sign_in_ip, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :current_sign_in_ip, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :last_sign_in_ip, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :last_sign_in_ip, :class => 'text_field form-control' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.email_field :email %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  users_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 <% end %>

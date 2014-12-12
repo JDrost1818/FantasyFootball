@@ -1,29 +1,28 @@
-<%= form_for(@league) do |f| %>
-  <% if @league.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@league.errors.count, "error") %> prohibited this league from being saved:</h2>
-
-      <ul>
-      <% @league.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_for @league, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="form-group">
+    <%= f.label :description, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :description, :class => 'text_field form-control' %>
     </div>
-  <% end %>
+  </div>
+  <div class="form-group">
+    <%= f.label :name, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :name, :class => 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :salary_cap, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :salary_cap, :class => 'text_field form-control' %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :salary_cap %><br>
-    <%= f.number_field :salary_cap %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  leagues_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 <% end %>
