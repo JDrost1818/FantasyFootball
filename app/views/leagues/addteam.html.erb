@@ -1,0 +1,17 @@
+<%- model_class = League -%>
+<div class="jumbotron trans-color">
+  <h1 align="center"><%=t '.title', :default => @league.name %></h1>
+  <p align="center">To get started, choose a league to join and create a team. you will be playing in no time. If none fit your fancy, simply create a new one!</p>
+  <p align="center"><a class="btn btn-success btn-lg" href="/leagues/new">Create League</a>
+</div>
+
+<div class="fieldset custom-table">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:description) %></dt>
+      <dd><pre class="prettyprint"><%= @league.description %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
+      <dd><pre class="prettyprint"><%= @league.name %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:salary_cap) %></dt>
+      <dd><pre class="prettyprint"><%= @league.salary_cap %></pre></dd>
+  </dl>
+</div>

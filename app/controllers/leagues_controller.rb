@@ -1,5 +1,5 @@
 class LeaguesController < ApplicationController
-  before_action :set_league, only: [:show, :edit, :update, :destroy]
+  before_action :set_league, only: [:show, :edit, :update, :destroy, :addteam]
 
   # GET /leagues
   # GET /leagues.json
@@ -25,12 +25,13 @@ class LeaguesController < ApplicationController
   # POST /leagues.json
   def create
     @league = League.new(league_params)
-
     respond_to do |format|
       if @league.save
+        puts "\n\n\n\nBye\n\n\n\n"
         format.html { redirect_to @league, notice: 'League was successfully created.' }
         format.json { render :show, status: :created, location: @league }
       else
+        puts "\n\n\n\n" + @league.save + "\n\n\n\n"
         format.html { render :new }
         format.json { render json: @league.errors, status: :unprocessable_entity }
       end
@@ -61,6 +62,9 @@ class LeaguesController < ApplicationController
     end
   end
 
+  def addteam
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_league
@@ -69,6 +73,6 @@ class LeaguesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def league_params
-      params.require(:league).permit(:description, :name, :salary_cap)
+      params.require(:league).permit(:name, :salary_cap, :description)
     end
 end
