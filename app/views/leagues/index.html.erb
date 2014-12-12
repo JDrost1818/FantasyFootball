@@ -1,8 +1,10 @@
 <%- model_class = League -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+<div class="jumbotron trans-color">
+  <h1 align="center"><%=t '.title', :default => "Open Leagues" %></h1>
+  <p align="center">To get started, choose a league to join and create a team. you will be playing in no time. If none fit your fancy, simply create a new one!</p>
+  <p align="center"><a class="btn btn-success btn-lg" href="/leagues/new">Create League</a>
 </div>
-<table class="table table-striped">
+<table class="table table-striped custom-table">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:name) %></th>
@@ -34,7 +36,3 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_league_path,
-            :class => 'btn btn-primary' %>
