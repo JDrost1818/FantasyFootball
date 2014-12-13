@@ -1,0 +1,30 @@
+<%= form_for @league, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="jumbotron trans-color">
+    <% if current_user.id == @league.league_owner_id and @league.is_open_for_registration then %>
+      <h2 align="left"><%=t '.title', :default => @league.name %></h2>
+      <%=link_to "Close Registration", 
+      			 { :action => "close", :id => @league.id }, 
+      			 { :align=>"left", :class=>"btn btn-danger pull-left"} %>
+	<% else %>
+	  <h2 align="left"><%=t '.title', :default => @league.name %></h2>
+	<% end %>
+  </div>
+  <h3 align="center"><%=t '.title', :default => @league.name + " Rules"%></h3>
+
+  <table class="table table-striped custom-table">
+    <thead>
+      <tr>
+        <th>Team Name</th>
+        <th>Owner<th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @league.teams.each do |team| %>
+          <tr>
+            <td><%= team.name %></td>
+            <td><%= User.find(team.user_id).full_name %></td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

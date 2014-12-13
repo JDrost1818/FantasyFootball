@@ -19,6 +19,10 @@ body { padding-top: 60px;
 }
 .trans-color {
 	background-color: transparent;
+}
+
+.custom-jumbotron {
+	background-color: transparent;
 	width: 600px;
 	max-width: 90%;
 	min-width: 600px !important;
@@ -26,4 +30,12 @@ body { padding-top: 60px;
 
 .custom-table {
 	width: 80%;
+}
+
+.columned-text {
+	float:left;
+    margin-right:5px;
+}
+
+.close-league-button {
 }

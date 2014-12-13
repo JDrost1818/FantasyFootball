@@ -1,5 +1,5 @@
 class LeaguesController < ApplicationController
-  before_action :set_league, only: [:show, :edit, :update, :destroy, :addteam]
+  before_action :set_league, only: [:show, :edit, :update, :destroy, :addteam, :close]
 
   # GET /leagues
   # GET /leagues.json
@@ -10,6 +10,11 @@ class LeaguesController < ApplicationController
   # GET /leagues/1
   # GET /leagues/1.json
   def show
+  end
+
+  def close
+    @league.close_registration
+    redirect_to league_url(@league.id)
   end
 
   # GET /leagues/new
