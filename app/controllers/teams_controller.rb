@@ -14,7 +14,21 @@ class TeamsController < ApplicationController
 
   # GET /teams/new
   def new
-    @team = Team.new
+    @league = League.find(params[:league_id])
+    @team = Team.new(team_params)
+    current_user.teams << @team
+    @league.teams << @team
+
+    respond_to do |format|
+      if @team.save
+        format.html { redirect_to :back }
+        format.json { render :show, status: :created, location: @team }
+        format.js {render inline: "location.reload();" }
+      else
+        format.html { render :new }
+        format.json { render json: @team.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # GET /teams/1/edit
@@ -24,13 +38,16 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
+    @league = League.find(params[:league_id])
     @team = Team.new(team_params)
     current_user.teams << @team
+    @league.teams << @team
 
     respond_to do |format|
       if @team.save
         format.html { redirect_to @team, notice: 'Team was successfully created.' }
         format.json { render :show, status: :created, location: @team }
+        format.js {render inline: "location.reload();" }
       else
         format.html { render :new }
         format.json { render json: @team.errors, status: :unprocessable_entity }
@@ -70,6 +87,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name, :total_salary)
+      params.permit(:team, :name, :league_id)
     end
 end

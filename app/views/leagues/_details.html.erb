@@ -1,4 +1,4 @@
-<%= form_for @league, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for @league, :remote=>true, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="jumbotron trans-color">
     <% if current_user.id == @league.league_owner_id and @league.is_open_for_registration then %>
       <h2 align="left"><%=t '.title', :default => @league.name %></h2>
@@ -9,7 +9,6 @@
 	  <h2 align="left"><%=t '.title', :default => @league.name %></h2>
 	<% end %>
   </div>
-  <h3 align="center"><%=t '.title', :default => @league.name + " Rules"%></h3>
 
   <table class="table table-striped custom-table">
     <thead>
@@ -18,13 +17,8 @@
         <th>Owner<th>
       </tr>
     </thead>
-    <tbody>
-      <% @league.teams.each do |team| %>
-          <tr>
-            <td><%= team.name %></td>
-            <td><%= User.find(team.user_id).full_name %></td>
-          </tr>
-      <% end %>
+    <tbody id="teams">
+      <%= render @league.teams %>
     </tbody>
   </table>
 <% end %>

@@ -8,7 +8,9 @@ Rails.application.routes.draw do
 
   resources :teams
 
-  resources :leagues
+  resources :leagues do
+    resources :teams
+  end
   get 'leagues/:id/addteam' => 'leagues#addteam'
   get 'leagues/:id/close' => 'leagues#close'
 

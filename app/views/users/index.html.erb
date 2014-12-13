@@ -9,6 +9,7 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name("Team Name") %></th>
+      <th><%= model_class.human_attribute_name("League") %></th>
       <th><%= model_class.human_attribute_name("Record") %></th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
     <% current_user.teams.each do |team| %>
       <tr>
         <td><%= link_to team.name, team_path(team) %></td>
+        <td><%= if team.league != nil then team.league.name else "NA" end %></td>
         <td><%= team.get_record %></td>
       </tr>
     <% end %>
