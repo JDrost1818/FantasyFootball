@@ -13,12 +13,21 @@ body { padding-top: 60px;
 }
 .wrapper {
 	min-height: 93.7vh;
-	background-color: #f0f0f0;
 	min-width: 600px !important;
 
 }
 .trans-color {
 	background-color: transparent;
+}
+
+.wrapper, .background-color {
+	background-color: #f0f0f0;
+}
+
+.log-in {
+	margin-top: 0px;
+	padding-top: 20px;
+	padding-bottom: 10px;
 }
 
 .custom-jumbotron {
@@ -39,3 +48,4 @@ body { padding-top: 60px;
 
 .close-league-button {
 }
+

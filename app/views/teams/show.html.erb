@@ -1,27 +1,24 @@
-<%- model_class = Team -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+<%- model_class = League -%>
+<div class="jumbotron custom-jumbotron">
+  <h1 align="center"><%=t '.title', :default => "Open Leagues" %></h1>
+  <p align="center">To get started, choose a league to join and create a team. you will be playing in no time. If none fit your fancy, simply create a new one!</p>
+  <p align="center">
+  <a class="btn btn-success btn-lg" href="/leagues/new">Create League</a>
 </div>
-
-<div class="fieldset">
-  <dl>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:user_id) %></dt>
-      <dd><pre class="prettyprint"><%= @team.user_id %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:name) %></dt>
-      <dd><pre class="prettyprint"><%= @team.name %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:total_salary) %></dt>
-      <dd><pre class="prettyprint"><%= @team.total_salary %></pre></dd>
-  </dl>
-</div>
-
-<div class="form-group">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              teams_path, :class => 'btn btn-default'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_team_path(@team), :class => 'btn btn-default' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              team_path(@team),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-</div>
+<table class="table table-striped custom-table">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:position) %></th>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th>Points<th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @team.players.each do |player| %>
+            <td><%= player.position %></td>
+            <td><%= link_to player.full_name, player_path(player) %></td>
+            <td>???<td>
+          </tr>
+    <% end %>
+  </tbody>
+</table>

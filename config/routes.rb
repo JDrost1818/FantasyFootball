@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get 'leagues/:id/addteam' => 'leagues#addteam'
   get 'leagues/:id/close' => 'leagues#close'
 
+  resources :players_teams
+
   root "users#index"
 
 
