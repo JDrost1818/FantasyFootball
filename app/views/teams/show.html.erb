@@ -5,17 +5,22 @@
 <table class="table table-striped custom-table">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:position) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
-      <th>Points<th>
+      <th>Pos</th>
+      <th>Player, Team</th>
+      <th>Action</th>
+      <th>Points</th>
     </tr>
   </thead>
   <tbody>
-    <% @team.players.each do |player| %>
-            <td><%= player.position %></td>
-            <td><%= link_to player.full_name, player_path(player) %></td>
-            <td>???<td>
-          </tr>
+    <% player_list = @team.get_formatted_player_list %>
+    <% player_list.each do |player| %>
+      <% if player.instance_of? Player %>
+        <% @player = player %>
+        <%= render 'filled_slot', locals: {player: @player} %>
+      <% else %>
+        <% @string = player %>
+        <%= render 'empty_slot', locals: {string: @string} %>
+      <% end %>
     <% end %>
   </tbody>
 </table>

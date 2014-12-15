@@ -1,0 +1,10 @@
+<%= form_for(@string) do |f| %>
+	<tr>
+      <td><%= @string %></td>
+      <td>EMPTY</td>
+      <td><%= link_to "Add",
+      			 { :action => "free_agency", :id => params[:id], :tab => @string }, 
+      			 { :align=>"left", :class=>"btn btn-sm btn-success" } %></td>
+      <td>???</td>
+    </tr>
+<% end %>

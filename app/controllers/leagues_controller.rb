@@ -34,8 +34,8 @@ class LeaguesController < ApplicationController
   def create
     @league = League.new(league_params)
     @league.league_owner_id = current_user.id
+    
     respond_to do |format|
-
       if @league.save
         format.html { redirect_to :action => "addteam", :id => @league.id }
         format.json { render :show, status: :created, location: @league.addteam }

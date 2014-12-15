@@ -12,21 +12,26 @@ class TeamsController < ApplicationController
   def show
   end
 
-  def free_agency
+  # GET /teams/1/rem_player/1
+  def rem_player
+    player = Player.find(params[:player_id])
+    team = Team.find(params[:id])
+    player.teams.delete(team)
+    redirect_to :back
   end
 
+  # GET /teams/1/add_player/1
   def add_player
-    # Check if we have that position filled
-      # if it is filled, ask if they want to replace a player
-      # if it isn't filled, add the player
-    did_add = @team.add_player Player.find(params[:player_id])
-    if did_add then
-      redirect_to :back
-    else
-      # Should prompt the user and say
-      # You need to drop a #{pos} before you can add
-      # #{player.name}
-      redirect_to :back
+    new_player = Player.find(params[:player_id])
+    error = @team.add_player new_player
+    if not error then
+      redirect_to :action => "free_agency", :tab => new_player.position
+    elsif error == 1
+      redirect_to :back, alert: "Unable to add #{new_player.full_name}. "\
+                                 "Please drop a #{new_player.position} to make room."
+    elsif error = 2
+      redirect_to :back, alert: "You do not have enough cap space to " \
+                                "sign #{new_player.full_name}"
     end
   end
   

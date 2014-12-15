@@ -16,6 +16,26 @@ class League < ActiveRecord::Base
 	end
 
 	def get_fa_by_pos pos 
+		player_list = []
+		Player.all.each do |p|
+	      if (teams.to_a & p.teams).empty? and p.position == pos then
+	        player_list.push(p)
+	      end
+	    end
+	    return player_list
+	end
 
+	def get_all_fa 
+		qb = []; rb = []; wr = []; te = []; k = [];
+		Player.all.each do |p|
+	      if (teams.to_a & p.teams).empty? then
+	      	if 	  p.position == "QB" then qb.push p
+	        elsif p.position == "RB" then rb.push p
+	        elsif p.position == "WR" then wr.push p
+	        elsif p.position == "TE" then te.push p
+	        elsif p.position == "K"  then k.push p  end	
+	      end
+	    end
+	    return qb, rb, wr, te, k
 	end
 end

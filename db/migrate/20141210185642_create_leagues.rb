@@ -6,6 +6,7 @@ class CreateLeagues < ActiveRecord::Migration
       t.string :name
       t.integer :salary_cap
       t.boolean :is_open_for_registration, :default => true
+      t.boolean :free_agency_changed, :default => true
 
       t.timestamps
     end

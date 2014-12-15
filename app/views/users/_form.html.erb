@@ -1,9 +1,10 @@
 <%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
   <div class="form-group">
-    <%= f.label :first_name, :class => 'control-label col-md-2' %>
+    <%= f.label :first_name, :class => 'control-label', :for => "focusedInput" %>
     <div class="col-md-10">
-      <%= f.text_field :first_name, :class => 'text_field form-control' %>
+      <%= f.text_field :first_name, :class => 'form-control', :id => "inputDefault" %>
     </div>
+
   </div>
   <div class="form-group">
     <%= f.label :last_name, :class => 'control-label col-md-2' %>

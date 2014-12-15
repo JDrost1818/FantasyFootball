@@ -48,6 +48,11 @@ body { padding-top: 60px;
 
 .custom-header {
 	width: 80%;
+	margin-top: -10px !important;
 	padding-top: 30px;
 	padding-bottom: 30px;
+}
+
+#defaultInput, #focusedInput {
+	margin-bottom: 10px;
 }
