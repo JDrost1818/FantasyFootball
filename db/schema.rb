@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141213165220) do
+ActiveRecord::Schema.define(version: 20141215081341) do
 
   create_table "games", force: true do |t|
     t.integer  "week"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20141213165220) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "position"
+    t.string   "nfl_team"
     t.integer  "salary"
     t.integer  "team_id"
     t.datetime "created_at"

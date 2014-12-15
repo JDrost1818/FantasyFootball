@@ -37,11 +37,11 @@ users.each do |cur_entry|
 	l2.save
 end
 
-p = Player.create!(first_name: "Peyton",
-				   last_name: "Manning", 
-				   position: "QB", 
-				   salary: "10000")
-t = Team.find(2)
-t.players << p
-t.save
-p.save
+File.open("Players.csv").each_line do |player|
+	info = player.split(",")
+	p = Player.create!(first_name: 	info[0],
+					   last_name: 	info[1], 
+					   position: 	info[2], 
+					   nfl_team: 	info[3],
+					   salary: 		info[4])
+end

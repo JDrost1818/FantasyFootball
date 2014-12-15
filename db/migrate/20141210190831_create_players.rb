@@ -4,6 +4,7 @@ class CreatePlayers < ActiveRecord::Migration
       t.string :first_name
       t.string :last_name
       t.string :position
+      t.string :nfl_team
       t.integer :salary
       t.integer :team_id
 
