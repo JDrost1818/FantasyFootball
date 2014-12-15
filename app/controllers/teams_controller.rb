@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :free_agency, :add_player]
 
   # GET /teams
   # GET /teams.json
@@ -12,6 +12,24 @@ class TeamsController < ApplicationController
   def show
   end
 
+  def free_agency
+  end
+
+  def add_player
+    # Check if we have that position filled
+      # if it is filled, ask if they want to replace a player
+      # if it isn't filled, add the player
+    did_add = @team.add_player Player.find(params[:player_id])
+    if did_add then
+      redirect_to :back
+    else
+      # Should prompt the user and say
+      # You need to drop a #{pos} before you can add
+      # #{player.name}
+      redirect_to :back
+    end
+  end
+  
   # GET /teams/new
   def new
     @league = League.find(params[:league_id])
@@ -87,6 +105,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.permit(:team, :name, :league_id)
+      params.permit(:team, :name, :league_id, :player_id)
     end
 end

@@ -7,14 +7,14 @@ Rails.application.routes.draw do
   resources :users
 
   resources :teams
+  get 'teams/:id/add_player' => 'teams#free_agency'
+  get 'teams/:id/add_player/:player_id' => 'teams#add_player'
 
   resources :leagues do
     resources :teams
   end
   get 'leagues/:id/addteam' => 'leagues#addteam'
   get 'leagues/:id/close' => 'leagues#close'
-
-  resources :players_teams
 
   root "users#index"
 

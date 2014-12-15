@@ -39,6 +39,7 @@ end
 
 File.open("Players.csv").each_line do |player|
 	info = player.split(",")
+	if info[4] == "\r\n" then info[4] = 5000 end
 	p = Player.create!(first_name: 	info[0],
 					   last_name: 	info[1], 
 					   position: 	info[2], 

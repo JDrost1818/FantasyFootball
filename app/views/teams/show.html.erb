@@ -1,9 +1,6 @@
 <%- model_class = League -%>
-<div class="jumbotron custom-jumbotron">
-  <h1 align="center"><%=t '.title', :default => "Open Leagues" %></h1>
-  <p align="center">To get started, choose a league to join and create a team. you will be playing in no time. If none fit your fancy, simply create a new one!</p>
-  <p align="center">
-  <a class="btn btn-success btn-lg" href="/leagues/new">Create League</a>
+<div class="custom-header">
+  <h1 align="left"><%=t '.title', :default => @team.name %></h1>
 </div>
 <table class="table table-striped custom-table">
   <thead>
@@ -22,3 +19,4 @@
     <% end %>
   </tbody>
 </table>
+<a class="btn btn-success btn-lg" href='<%= "#{@team.id}/add_player" %>'>Go To Free Agency</a>

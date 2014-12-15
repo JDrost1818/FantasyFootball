@@ -1,0 +1,38 @@
+<%- model_class = Team -%>
+
+<ul class="nav nav-tabs">
+  <li class="active"><a href="#QB" data-toggle="tab">QB</a></li>
+  <li><a href="#RB" data-toggle="tab">RB</a></li>
+  <li><a href="#WR" data-toggle="tab">WR</a></li>
+  <li><a href="#TE" data-toggle="tab">TE</a></li>
+  <li><a href="#K" data-toggle="tab">K</a></li>
+</ul>
+<div id="myTabContent" class="tab-content custom-table">
+  <% @team.positions.each do |cur_pos| %>
+    <div class="tab-pane fade <%= if cur_pos == "QB" then "active in" end %>" id='<%= cur_pos %>'>
+      <h3 align='left'><%= @team.free_agency_desc_by_pos cur_pos %></h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Add to Team</th>
+            <th><%= model_class.human_attribute_name(:name) %></th>
+            <th><%= model_class.human_attribute_name(:salary) %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @team.get_fa_players_by_pos(cur_pos).each do |player| %>
+            <tr>
+              <td>
+              <%=link_to "Add", 
+                 { :action => "add_player", :id => @team.id, :player_id => player.id }, 
+                 { :align=>"left", :class=>"btn btn-sm btn-success"} %>
+               </td>
+              <td><%= player.full_name %></td>
+              <td><%= "$" + number_with_delimiter(player.salary, :delimiter => ',').to_s %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

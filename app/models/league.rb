@@ -14,4 +14,8 @@ class League < ActiveRecord::Base
 	def get_salary_cap
 		(salary_cap / 1000).to_s + "k"
 	end
+
+	def get_fa_by_pos pos 
+
+	end
 end
