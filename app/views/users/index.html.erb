@@ -18,7 +18,7 @@
       <tr>
         <td><%= link_to team.name, team_path(team) %></td>
         <td><%= if team.league != nil then team.league.name else "NA" end %></td>
-        <td><%= team.get_record %></td>
+        <td><%= team.name %></td>
       </tr>
     <% end %>
   </tbody>

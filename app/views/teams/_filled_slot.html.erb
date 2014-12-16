@@ -4,7 +4,7 @@
       <td><%= link_to @player.full_name, player_path(@player) %>
       <%= ", #{@player.nfl_team}" %></td>
       <td><%= link_to "Drop",
-      			 { :action => "rem_player", :id => params[:id], :player_id  => @player.id }, 
+      			 { :action => "rem_player", :id => params[:id], :player_id  => @player.id, :tab => "Roster" }, 
       			 { :align=>"left", :class=>"btn btn-sm btn-danger" } %></td>
       <td>???</td>
     </tr>

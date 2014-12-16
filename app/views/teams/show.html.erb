@@ -1,27 +1,23 @@
-<%- model_class = League -%>
+<%- model_class = Team -%>
+<% @league = League.find(@team.league_id) %>
+<% @s = params[:tab] %>
+
 <div class="custom-header">
   <h1 align="left"><%=t '.title', :default => @team.name %></h1>
 </div>
-<table class="table table-striped custom-table">
-  <thead>
-    <tr>
-      <th>Pos</th>
-      <th>Player, Team</th>
-      <th>Action</th>
-      <th>Points</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% player_list = @team.get_formatted_player_list %>
-    <% player_list.each do |player| %>
-      <% if player.instance_of? Player %>
-        <% @player = player %>
-        <%= render 'filled_slot', locals: {player: @player} %>
-      <% else %>
-        <% @string = player %>
-        <%= render 'empty_slot', locals: {string: @string} %>
-      <% end %>
-    <% end %>
-  </tbody>
-</table>
+
+<ul class="nav nav-tabs custom-table">
+  <li class=<%= if @s == "League" or @s == nil then "active" end %>><a href="#League" data-toggle="tab">League</a></li>
+  <li class=<%=@s=="Roster" ? "active" : ""%>><a href="#Roster" data-toggle="tab">Roster</a></li>
+  <li class=<%=@s=="Scores" ? "active" : ""%>><a href="#Scores" data-toggle="tab">Scores</a></li>
+</ul>
+<div id="myTabContent" class="tab-content custom-table">
+  <div class="tab-pane fade <%= (@s == "League" or @s == nil) ? "active in" : "" %>" id="League">
+    <%= render 'leagues/details', locals: { league: @league} %>
+  </div>
+  <div class="tab-pane fade <%= @s == "Roster" ? "active in" : "" %>" id="Roster">
+    <%= render 'roster', locals: { team: @team} %>
+  </div>
+</div>
+
 <a class="btn btn-success btn-lg" href='<%= "#{@team.id}/add_player" %>'>Go To Free Agency</a>

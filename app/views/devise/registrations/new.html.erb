@@ -1,18 +1,37 @@
-<div class="center">
+<div class="container custom-header">
+  <h1 class="pull-left">Register</h1>
+</div>
 
-    <h2>Sign up</h2>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
 
-    <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-        <%= devise_error_messages! %>
+    <div class="field custom-table">
+        <%= f.label :first_name, :class=>"control-label pull-left", :for=>"focusedInput" %><br />
+        <%= f.text_field :first_name, placeholder: "First Name*", autofocus: true, :class => "form-control", :id =>"focusedInput" %><br>
+    </div>
 
-        <%= f.text_field :first_name, placeholder: "First Name*", autofocus: true %><br>
-        <%= f.text_field :last_name, placeholder: "Last Name*" %><br>
-        <%= f.email_field :email, placeholder: "Email*" %><br>
-        <%= f.password_field :password, placeholder: "Password*" %><br>
-        <%= f.password_field :password_confirmation, placeholder: "Password Confirmation*" %>
-        
-        <div><%= f.submit "Sign up", class: "btn btn-large btn-primary" %></div>
-    <% end %>
+    <div class="field custom-table">
+        <%= f.label :last_name, :class=>"control-label pull-left", :for=>"defaultInput" %><br />
+        <%= f.text_field :last_name, placeholder: "Last Name*", :class => "form-control", :id =>"defaultInput" %><br>
+    </div>
 
+    <div class="field custom-table">
+        <%= f.label :email, :class=>"control-label pull-left", :for=>"defaultInput" %><br />
+        <%= f.email_field :email, placeholder: "Email*", :class => "form-control", :id =>"defaultInput" %><br>
+    </div>
+
+    <div class="field custom-table">
+        <%= f.label :password, :class=>"control-label pull-left", :for=>"defaultInput" %>
+        <%= f.password_field :password, placeholder: "Password*", :class => "form-control", :id =>"defaultInput" %><br>
+    </div>
+
+    <div class="field custom-table">
+        <%= f.label :password_confirmation, :class=>"control-label pull-left", :for=>"defaultInput" %><br />
+        <%= f.password_field :password_confirmation, placeholder: "Password Confirmation*", :class => "form-control", :id =>"defaultInput" %>
+    </div>
+
+    <div class="custom-table" align="left"><%= f.submit "Sign up", class: "btn btn-success" %></div>
+<% end %>
+<div class="container custom-table link-buffer" align="left">
     Already a user? <%= render "devise/shared/links" %>
 </div>

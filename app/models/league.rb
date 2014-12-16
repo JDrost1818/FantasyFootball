@@ -5,10 +5,45 @@ class League < ActiveRecord::Base
 	validates_length_of :name, :minimum => 5, :maximum => 20, :allow_blank => false
 
 	def close_registration
-		puts "\n\n\n\n" + is_open_for_registration.to_s + "\n\n\n\n"
 		self.is_open_for_registration = false
+		set_schedule
 		self.save
-		puts "\n\n\n\n" + is_open_for_registration.to_s + "\n\n\n\n"
+	end
+
+	def set_schedule
+		teams.each do |team1|
+			max_matchups = 1
+			(1..16).each do |week|
+				if week == teams.length then max_matchups += 1 end
+				teams.each do |team2|
+					if team1 != team2 and team1.get_game_by_week(week).nil? and
+						team2.get_game_by_week(week).nil? and
+						team1.get_num_matchups(team2) < max_matchups then
+
+						away_team = rand(2) == 1 ? team1 : team2
+						home_team = team1 == away_team ? team2 : team1
+
+						new_game = Game.create!(:away_team => away_team, 
+									 			:home_team => home_team, 
+									 			:week => week)
+						team1.games << new_game
+						team2.games << new_game
+						team1.save
+						team2.save
+					end
+				end
+			end
+		end
+	end
+
+	def advance_week
+		current_week = current_week + 1
+		# Email all the team owners
+		# If the season is over, do something. IDK
+	end
+
+	def get_current_week
+		current_week
 	end
 
 	def get_salary_cap

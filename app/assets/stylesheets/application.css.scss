@@ -46,13 +46,20 @@ body { padding-top: 60px;
     margin-right:5px;
 }
 
-.custom-header {
-	width: 80%;
+.custom-header, .custom-header-2 {
 	margin-top: -10px !important;
 	padding-top: 30px;
 	padding-bottom: 30px;
 }
+.custom-header {
+	width: 80%;
+}
 
 #defaultInput, #focusedInput {
 	margin-bottom: 10px;
+}
+
+.link-buffer {
+	padding-left: 0px;
+	padding-top: 10px;
 }

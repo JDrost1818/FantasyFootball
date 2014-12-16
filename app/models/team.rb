@@ -1,16 +1,54 @@
 class Team < ActiveRecord::Base
 	belongs_to :league
 	belongs_to :user
+
 	has_and_belongs_to_many :players
 
-	NUM_QBS = 1
-	NUM_RBS = 3
-	NUM_WRS = 3
-	NUM_TES = 1
-	NUM_KS  = 1
+	has_many :home_games, :foreign_key => 'home_team_id', :class_name => 'Games'
+  	has_many :away_games, :foreign_key => 'away_team_id', :class_name => 'Games'
 
 	def get_record
-	    "16-0"
+		wins = 0; losses = 0;
+	    games.sort { |a,b| a.week <=> b.week }.each do |cur_game|
+	    	if cur_game.week < league.current_week then
+	    		if cur_game.winner == self then 
+	    			wins += 1
+	    		else 
+	    			losses += 1 end
+	    	end
+	    end
+	    return "#{wins}-#{losses}"
+	end
+
+	def get_current_game
+		return get_game_by_week(league.current_week)
+	end
+
+	def games
+		Game.where("home_team_id = ? OR away_team_id = ?", self.id, self.id)
+	end
+
+	def league
+		League.find(league_id)
+	end
+
+	def get_game_by_week week 
+		games.each do |game|
+			if game.week == week
+				return game
+			end
+		end
+		return nil
+	end
+
+	def get_num_matchups other_team
+		num_games = 0
+		games.each do |game|
+			if game.get_other_team(self) == other_team
+				num_games = num_games + 1
+			end
+		end
+		return num_games
 	end
 
 	def get_cap_space_disp

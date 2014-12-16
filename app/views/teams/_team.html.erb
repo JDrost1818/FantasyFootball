@@ -1,4 +1,10 @@
+<% user = User.find(team.user_id) %>
+<% league = League.find(team.league_id) %>
 <tr>
   <td><%= team.name %></td>
-  <td><%= User.find(team.user_id).full_name %></td>
+  <td><%= team.get_record %></td>
+  <td><%= user.full_name %></td>
+  <% if not league.is_open_for_registration then %>
+  	<td><%= team.get_current_game.get_other_team(team).name %></td>
+  <% end %>
 </tr>

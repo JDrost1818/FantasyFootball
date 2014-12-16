@@ -1,0 +1,24 @@
+ <%= form_for @team, :html => { :class => 'form-horizontal' } do |f| %>
+	 <table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th>Pos</th>
+	      <th>Player, Team</th>
+	      <th>Action</th>
+	      <th>Points</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <% player_list = @team.get_formatted_player_list %>
+	    <% player_list.each do |player| %>
+	      <% if player.instance_of? Player %>
+	        <% @player = player %>
+	        <%= render 'filled_slot', locals: {player: @player} %>
+	      <% else %>
+	        <% @string = player %>
+	        <%= render 'empty_slot', locals: {string: @string} %>
+	      <% end %>
+	    <% end %>
+	  </tbody>
+	</table>
+<% end %>

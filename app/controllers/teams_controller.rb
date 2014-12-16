@@ -15,9 +15,9 @@ class TeamsController < ApplicationController
   # GET /teams/1/rem_player/1
   def rem_player
     player = Player.find(params[:player_id])
-    team = Team.find(params[:id])
-    player.teams.delete(team)
-    redirect_to :back
+    @team = Team.find(params[:id])
+    player.teams.delete(@team)
+    redirect_to :action => "show", :id => params[:id], :tab => "Roster"
   end
 
   # GET /teams/1/add_player/1

@@ -1,20 +1,30 @@
 <%= form_for @league, :remote=>true, :html => { :class => 'form-horizontal' } do |f| %>
-  <div class="jumbotron trans-color">
-    <% if current_user.id == @league.league_owner_id and @league.is_open_for_registration then %>
-      <h2 align="left"><%=t '.title', :default => @league.name %></h2>
-      <%=link_to "Close Registration", 
-      			 { :action => "close", :id => @league.id }, 
-      			 { :align=>"left", :class=>"btn btn-danger pull-left"} %>
+  <div class="custom-header-2">
+    <% if current_user.id == @league.league_owner_id then %>
+      <% if @league.is_open_for_registration then %>
+        <%=link_to "Close Registration", 
+        			 { :action => "close", :id => @league.id, :controller => :leagues }, 
+        			 { :align=>"left", :class=>"btn btn-danger pull-left"} %>
+      <% else %>
+        <div>
+          <h2 align="left"><%=t '.title', :default => @league.name %></h2>
+          <%=link_to "Edit League", 
+                 edit_league_path(@league), 
+                 { :align=>"left", :class=>"btn btn-success pull-left"} %>
+        </div>
+      <% end %>
 	<% else %>
 	  <h2 align="left"><%=t '.title', :default => @league.name %></h2>
 	<% end %>
   </div>
 
-  <table class="table table-striped custom-table">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>Team Name</th>
-        <th>Owner<th>
+        <th>Record</th>
+        <th>Owner</th>
+        <th>Opp</th>
       </tr>
     </thead>
     <tbody id="teams">
