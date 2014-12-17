@@ -13,8 +13,18 @@ class LeaguesController < ApplicationController
   end
 
   def close
-    @league.close_registration
-    redirect_to league_url(@league.id)
+
+    if @league.teams.length == 0 then 
+      @league.delete
+      redirect_to League, alert: "League deleted because it contained no teams"
+    elsif @league.teams.length % 2 != 0 then
+      redirect_to :back, alert: "League must have an even number of teams"
+    else
+       @league.close_registration
+      team = @league.find_team_by current_user
+      if team.nil? then redirect_to "/"
+      else redirect_to team_url(team) end
+    end
   end
 
   # GET /leagues/new

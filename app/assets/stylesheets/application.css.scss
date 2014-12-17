@@ -63,3 +63,37 @@ body { padding-top: 60px;
 	padding-left: 0px;
 	padding-top: 10px;
 }
+
+.scoreboard {
+	background-color: transparent;
+	width: 100%;
+}
+
+.sb-top-right {
+	padding-right: 20px;
+	text-align: center;
+}
+
+.sb-top-left {
+	padding-left: 20px;
+	text-align: center;
+}
+
+#parent_div_1 {
+    width:50%;
+    height:100%;
+    float:left;
+    border-right:1px solid #7f8c8d;
+}
+
+#parent_div_2 {
+    width:50%;
+    height:100px;
+    float:right;
+}
+
+#fa-to-team-link {
+	background-color: black;
+	text-align: left;
+	float: left;
+}

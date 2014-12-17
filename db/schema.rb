@@ -16,9 +16,9 @@ ActiveRecord::Schema.define(version: 20141215230442) do
   create_table "games", force: true do |t|
     t.integer  "week"
     t.integer  "away_team_id"
-    t.integer  "away_score"
+    t.integer  "away_score",   default: 0
     t.integer  "home_team_id"
-    t.integer  "home_score"
+    t.integer  "home_score",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -52,7 +52,9 @@ ActiveRecord::Schema.define(version: 20141215230442) do
 
   create_table "stats", force: true do |t|
     t.integer "week"
-    t.integer "points", default: 0
+    t.integer "points",        default: 0
+    t.integer "for_league_id"
+    t.integer "player_id"
   end
 
   create_table "teams", force: true do |t|

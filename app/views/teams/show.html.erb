@@ -1,11 +1,12 @@
 <%- model_class = Team -%>
 <% @league = League.find(@team.league_id) %>
+<% @game = @team.get_current_game %>
 <% @s = params[:tab] %>
 
 <div class="custom-header">
   <h1 align="left"><%=t '.title', :default => @team.name %></h1>
 </div>
-
+<a class="btn btn-success btn-lg" href='<%= "#{@team.id}/add_player" %>'>Go To Free Agency</a>
 <ul class="nav nav-tabs custom-table">
   <li class=<%= if @s == "League" or @s == nil then "active" end %>><a href="#League" data-toggle="tab">League</a></li>
   <li class=<%=@s=="Roster" ? "active" : ""%>><a href="#Roster" data-toggle="tab">Roster</a></li>
@@ -18,6 +19,7 @@
   <div class="tab-pane fade <%= @s == "Roster" ? "active in" : "" %>" id="Roster">
     <%= render 'roster', locals: { team: @team} %>
   </div>
+  <div class="tab-pane fade <%= @s == "Scores" ? "active in" : "" %>" id="Scores">
+    <%= render 'games/scoreboard', locals: { game: @game} %>
+  </div>
 </div>
-
-<a class="btn btn-success btn-lg" href='<%= "#{@team.id}/add_player" %>'>Go To Free Agency</a>

@@ -2,7 +2,13 @@
 <div class="container custom-header">
   <h1 class="pull-left">Free Agency</h1>
   <h3 class="pull-right"><%= "Cap Space: #{@team.get_cap_space_disp}" %></h3>
+  <div align="left">
+  <%=link_to "Back to Team", 
+  { :action => "show", :id => @team.id },
+  { :class=>"", :id => "fa-to-team-link", :align=>"left"} %>
 </div>
+</div>
+
 <% @s = params[:tab] %>
 <ul class="nav nav-tabs custom-table">
   <li class=<%= if @s == "QB" or @s == nil then "active" end %>><a href="#QB" data-toggle="tab">QB</a></li>

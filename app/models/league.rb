@@ -36,6 +36,13 @@ class League < ActiveRecord::Base
 		end
 	end
 
+	def find_team_by user
+		teams.each do |team|
+			if team.user_id == user.id then return team end
+		end
+		return nil
+	end
+	
 	def advance_week
 		current_week = current_week + 1
 		# Email all the team owners

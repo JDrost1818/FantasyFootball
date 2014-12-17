@@ -29,3 +29,25 @@
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>
 </div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <% 16.times do |num| %>
+        <th><%= "Week #{num + 1}" %></th>
+      <% end %> 
+    </tr>
+  </thead>
+  <tbody>
+    <% stats = @player.stats.sort { |a, b| a.week <=> b.week} %>
+    <tr>
+    <% 16.times do |week| %>
+      <% if week < stats.length then %>
+        <td><%= stats[week].points %></td>
+      <% else %>
+        <td>-</td>
+      <% end %>
+    <% end %>
+    </tr>
+  </tbody>
+</table>

@@ -112,7 +112,7 @@ class Team < ActiveRecord::Base
 		end
 
 		# No errors, add player
-		players << player
+		self.players << player
 		return nil
 	end
 
@@ -142,5 +142,5 @@ class Team < ActiveRecord::Base
     		return "Current #{pos}: #{player_name}"
     	end
     	return return_string
-    end
+	end
 end

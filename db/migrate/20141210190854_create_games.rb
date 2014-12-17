@@ -3,9 +3,9 @@ class CreateGames < ActiveRecord::Migration
     create_table :games do |t|
       t.integer :week
       t.integer :away_team_id
-      t.integer :away_score
+      t.integer :away_score, :default => 0
       t.integer :home_team_id
-      t.integer :home_score
+      t.integer :home_score, :default => 0
 
       t.timestamps
     end
