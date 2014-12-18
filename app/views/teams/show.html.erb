@@ -3,10 +3,16 @@
 <% @game = @team.get_current_game %>
 <% @s = params[:tab] %>
 
-<div class="custom-header">
-  <h1 align="left"><%=t '.title', :default => @team.name %></h1>
+<div>
+  <div class="custom-header">
+    <h1 align="left"><%= "#{@team.name} (#{@team.get_record})" %></h1>
+    <p align="left"><%= @team.league.name %></p>
+    <%=link_to "Edit Team", 
+                 { :action => "edit", :id => @team.id }, 
+                 { :class=>"btn btn-success pull-right pull-up-btn"} %>
+  </div>
+
 </div>
-<a class="btn btn-success btn-lg" href='<%= "#{@team.id}/add_player" %>'>Go To Free Agency</a>
 <ul class="nav nav-tabs custom-table">
   <li class=<%= if @s == "League" or @s == nil then "active" end %>><a href="#League" data-toggle="tab">League</a></li>
   <li class=<%=@s=="Roster" ? "active" : ""%>><a href="#Roster" data-toggle="tab">Roster</a></li>
@@ -17,9 +23,19 @@
     <%= render 'leagues/details', locals: { league: @league} %>
   </div>
   <div class="tab-pane fade <%= @s == "Roster" ? "active in" : "" %>" id="Roster">
-    <%= render 'roster', locals: { team: @team} %>
+    <% if @league.is_open_for_registration then %>
+      <h3>Free agency is not yet open for this league. 
+          Have the owner of the league close registration
+          to get started</h3>
+    <% else %>
+      <%= render 'roster', locals: { team: @team} %>
+    <% end %>
   </div>
   <div class="tab-pane fade <%= @s == "Scores" ? "active in" : "" %>" id="Scores">
-    <%= render 'games/scoreboard', locals: { game: @game} %>
+    <% if @league.is_open_for_registration then %>
+      <h3> You have no games. The league has yet to start </h3>
+    <% else %>
+      <%= render 'scoreboard', locals: { game: @game} %>
+    <% end %>
   </div>
 </div>

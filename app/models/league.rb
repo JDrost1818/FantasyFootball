@@ -10,13 +10,22 @@ class League < ActiveRecord::Base
 		self.save
 	end
 
+	def advance_week
+		self.teams.each do |team|
+			team.get_current_game.close
+		end
+		self.current_week += 1
+		self.save
+	end
+
 	def set_schedule
 		teams.each do |team1|
 			max_matchups = 1
 			(1..16).each do |week|
 				if week == teams.length then max_matchups += 1 end
 				teams.each do |team2|
-					if team1 != team2 and team1.get_game_by_week(week).nil? and
+					if team1 != team2 and
+						team1.get_game_by_week(week).nil? and
 						team2.get_game_by_week(week).nil? and
 						team1.get_num_matchups(team2) < max_matchups then
 
@@ -41,12 +50,6 @@ class League < ActiveRecord::Base
 			if team.user_id == user.id then return team end
 		end
 		return nil
-	end
-	
-	def advance_week
-		current_week = current_week + 1
-		# Email all the team owners
-		# If the season is over, do something. IDK
 	end
 
 	def get_current_week

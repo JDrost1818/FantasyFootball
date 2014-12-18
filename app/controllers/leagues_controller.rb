@@ -1,5 +1,5 @@
 class LeaguesController < ApplicationController
-  before_action :set_league, only: [:show, :edit, :update, :destroy, :addteam, :close]
+  before_action :set_league, only: [:show, :edit, :update, :destroy, :addteam, :close, :advance_week]
 
   # GET /leagues
   # GET /leagues.json
@@ -25,6 +25,11 @@ class LeaguesController < ApplicationController
       if team.nil? then redirect_to "/"
       else redirect_to team_url(team) end
     end
+  end
+
+  def advance_week
+    @league.advance_week
+    redirect_to :back
   end
 
   # GET /leagues/new

@@ -2,56 +2,58 @@
 <div class="container custom-header">
   <h1 class="pull-left">Free Agency</h1>
   <h3 class="pull-right"><%= "Cap Space: #{@team.get_cap_space_disp}" %></h3>
-  <div align="left">
+</div>
+<div width="100%" class="boo">
   <%=link_to "Back to Team", 
   { :action => "show", :id => @team.id },
-  { :class=>"", :id => "fa-to-team-link", :align=>"left"} %>
-</div>
+  { :id => "fa-to-team-link" } %>
 </div>
 
 <% @s = params[:tab] %>
-<ul class="nav nav-tabs custom-table">
-  <li class=<%= if @s == "QB" or @s == nil then "active" end %>><a href="#QB" data-toggle="tab">QB</a></li>
-  <li class=<%=@s=="RB" ? "active" : ""%>><a href="#RB" data-toggle="tab">RB</a></li>
-  <li class=<%=@s=="WR" ? "active" : ""%>><a href="#WR" data-toggle="tab">WR</a></li>
-  <li class=<%=@s=="TE" ? "active" : ""%>><a href="#TE" data-toggle="tab">TE</a></li>
-  <li class=<%=@s=="K"  ? "active" : ""%>><a href="#K" data-toggle="tab">K</a></li>
-</ul>
-<div id="myTabContent" class="tab-content custom-table">
-  <% if League.find(@team.league_id).is_open_for_registration then %>
-    <h3>Free agency is not yet open for this league. Have the owner of the league close registration before continuing</h3>
-  <% else %>
-    <% free_agents = League.find(@team.league_id).get_all_fa %>
-    <% count = 0 %>
-    <% @team.positions.each do |cur_pos| %>
-      <div class="tab-pane fade <%=(cur_pos==@s or (cur_pos=="QB" and @s==nil)) ? "active in" : "" %>" id='<%= cur_pos %>'>
-        <h3 align='left'><%= @team.free_agency_desc_by_pos cur_pos %></h3>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th>Add</th>
-              <th><%= model_class.human_attribute_name(:name) %></th>
-              <th>NFL Team</th>
-              <th><%= model_class.human_attribute_name(:salary) %></th>
-            </tr>
-          </thead>
-          <tbody>
-            <% free_agents[count].each do |player| %>
+<div>
+  <ul class="nav nav-tabs custom-table">
+    <li class=<%= if @s == "QB" or @s == nil then "active" end %>><a href="#QB" data-toggle="tab">QB</a></li>
+    <li class=<%=@s=="RB" ? "active" : ""%>><a href="#RB" data-toggle="tab">RB</a></li>
+    <li class=<%=@s=="WR" ? "active" : ""%>><a href="#WR" data-toggle="tab">WR</a></li>
+    <li class=<%=@s=="TE" ? "active" : ""%>><a href="#TE" data-toggle="tab">TE</a></li>
+    <li class=<%=@s=="K"  ? "active" : ""%>><a href="#K" data-toggle="tab">K</a></li>
+  </ul>
+  <div id="myTabContent" class="tab-content custom-table">
+    <% if League.find(@team.league_id).is_open_for_registration then %>
+      <h3>Free agency is not yet open for this league. Have the owner of the league close registration before continuing</h3>
+    <% else %>
+      <% free_agents = League.find(@team.league_id).get_all_fa %>
+      <% count = 0 %>
+      <% @team.positions.each do |cur_pos| %>
+        <div class="tab-pane fade <%=(cur_pos==@s or (cur_pos=="QB" and @s==nil)) ? "active in" : "" %>" id='<%= cur_pos %>'>
+          <h3 align='left'><%= @team.free_agency_desc_by_pos cur_pos %></h3>
+          <table class="table table-striped">
+            <thead>
               <tr>
-                <td>
-                <%=link_to "Add", 
-                   { :action => "add_player", :id => @team.id, :player_id => player.id }, 
-                   { :align=>"left", :class=>"btn btn-sm btn-success"} %>
-                 </td>
-                <td><%= player.full_name %></td>
-                <td><%= player.nfl_team %></td>
-                <td><%= "$" + number_with_delimiter(player.salary, :delimiter => ',').to_s %></td>
+                <th>Add</th>
+                <th><%= model_class.human_attribute_name(:name) %></th>
+                <th>NFL Team</th>
+                <th><%= model_class.human_attribute_name(:salary) %></th>
               </tr>
-            <% end %>
-            <% count = count + 1 %>
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              <% free_agents[count].each do |player| %>
+                <tr>
+                  <td>
+                  <%=link_to "Add", 
+                     { :action => "add_player", :id => @team.id, :player_id => player.id }, 
+                     { :align=>"left", :class=>"btn btn-sm btn-success"} %>
+                   </td>
+                  <td><%= player.full_name %></td>
+                  <td><%= player.nfl_team %></td>
+                  <td><%= "$" + number_with_delimiter(player.salary, :delimiter => ',').to_s %></td>
+                </tr>
+              <% end %>
+              <% count = count + 1 %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>

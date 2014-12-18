@@ -6,7 +6,25 @@ class Game < ActiveRecord::Base
 		(team == away_team) ? away_score > home_score : home_team_score > away_team_score
 	end
 
+	def get_winner
+		if (home_score > away_score) then
+			return home_team
+		elsif away_score > home_score then
+			return away_team
+		else
+			return nil
+		end
+	end
+	
 	def get_score_for_one team
+		if team == home_team then
+			return home_score
+		elsif team == away_team then
+			return  away_score
+		else 
+			return 0
+		end
+				
 		(team == home_team) ? home_score : away_score
 	end
 
@@ -36,4 +54,14 @@ class Game < ActiveRecord::Base
 			return nil
 		end
 	end	
+
+	def update_score_for team, score
+		if (team == away_team) then self.away_score = score else self.home_score = score end 
+		self.save
+    end
+
+    def close
+    	self.is_finished = true
+    	save
+    end
 end

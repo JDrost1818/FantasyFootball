@@ -7,18 +7,26 @@ class Player < ActiveRecord::Base
 	end
 
 	def get_stat_by_week week, team
-		stats.each do |weekly_stat|
+		self.stats.each do |weekly_stat|
 			if weekly_stat.week == week and weekly_stat.for_league_id == team.league_id then
-				return weekly_stat.points
+				return weekly_stat
 			end
 		end
 		# So there wasn't a stat, make it
-		stats << Stat.create!(:week => week, :for_league_id => team.league_id )
-		save
-		return stats.points
+		stat = Stat.create!(:week => week, :for_league_id => team.league_id )
+		self.stats << stat
+		self.save
+		return stat
 	end
 
 	def get_current_week_stat_for team
-		get_stat_by_week(team.league.current_week, team)
+		stat = get_stat_by_week(team.league.current_week, team)
+		if stat.points.nil? then 0 else stat.points end
+	end
+
+	def set_this_week_score new_score, team
+		stat = get_stat_by_week(team.league.current_week, team)
+		stat.points = new_score
+		stat.save
 	end
 end

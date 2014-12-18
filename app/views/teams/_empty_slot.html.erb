@@ -1,13 +1,9 @@
 <%= form_for(@string) do |f| %>
 	<tr>
       <td><%= @string %></td>
-      <td>NONE</td>
-      <% if not @is_sb then %>
-	      <td><%= link_to "Add",
-	      			 { :action => "free_agency", :id => params[:id], :tab => @string }, 
-	      			 { :align=>"left", :class=>"btn btn-sm btn-success" } %></td>
-	  <% else %>
-	  	<td align="middle">0</td>
-	  <% end %>
+      <td>Empty</td>
+	  <td align="center"><%= link_to "Add",
+	  			 { :action => "free_agency", :id => params[:id], :tab => @string }, 
+	  			 { :align=>"left", :class=>"btn btn-sm btn-success" } %></td>
     </tr>
 <% end %>

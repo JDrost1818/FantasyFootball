@@ -7,10 +7,12 @@
         			 { :align=>"left", :class=>"btn btn-danger pull-left"} %>
       <% else %>
         <div>
-          <h2 align="left"><%=t '.title', :default => @league.name %></h2>
+          <%=link_to "Advance Week", 
+                 { :action => "advance_week", :id => @league.id, :controller => "leagues" }, 
+                 { :align=>"left", :class=>"btn btn-success pull-left pad-btn"} %>
           <%=link_to "Edit League", 
                  edit_league_path(@league), 
-                 { :align=>"left", :class=>"btn btn-success pull-left"} %>
+                 { :align=>"left", :class=>"btn btn-default pull-left"} %>
         </div>
       <% end %>
 	<% else %>

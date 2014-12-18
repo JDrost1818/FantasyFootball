@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20141215230442) do
     t.integer  "away_score",   default: 0
     t.integer  "home_team_id"
     t.integer  "home_score",   default: 0
+    t.boolean  "is_finished"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -8,16 +8,21 @@ class Team < ActiveRecord::Base
   	has_many :away_games, :foreign_key => 'away_team_id', :class_name => 'Games'
 
 	def get_record
-		wins = 0; losses = 0;
+		wins = 0; losses = 0; ties = 0;
 	    games.sort { |a,b| a.week <=> b.week }.each do |cur_game|
 	    	if cur_game.week < league.current_week then
-	    		if cur_game.winner == self then 
-	    			wins += 1
-	    		else 
-	    			losses += 1 end
+	    		if cur_game.get_winner == self then wins += 1
+	    		elsif cur_game.get_winner.nil? then ties += 1
+	    		else losses += 1 
+	    		end
 	    	end
 	    end
-	    return "#{wins}-#{losses}"
+
+	    if ties > 0 then 
+	    	return "#{wins}-#{losses}-#{ties}"
+	    else 
+	    	return "#{wins}-#{losses}"
+	    end
 	end
 
 	def get_current_game
@@ -130,6 +135,14 @@ class Team < ActiveRecord::Base
 		return player_list
 	end
 
+	def get_this_weeks_score
+		score = 0
+		players.each do |player|
+			score += player.get_current_week_stat_for(self)
+		end
+		return score
+	end
+
     def free_agency_desc_by_pos pos 
     	player_list = get_players_by_pos pos
     	if pos == "RB" or pos == "WR" then
@@ -143,4 +156,24 @@ class Team < ActiveRecord::Base
     	end
     	return return_string
 	end
+
+	def update_by_hash table
+		players = get_formatted_player_list
+
+		puts "\n\n\n\nWhat #{table["qb"]}\n\n\n\n}"
+
+		if players[0].instance_of? Player then players[0].set_this_week_score( table["qb"] , self ) end
+		if players[1].instance_of? Player then players[1].set_this_week_score( table["rb1"], self ) end
+		if players[2].instance_of? Player then players[2].set_this_week_score( table["rb2"], self ) end
+		if players[3].instance_of? Player then players[3].set_this_week_score( table["rb3"], self ) end
+		if players[4].instance_of? Player then players[4].set_this_week_score( table["wr1"], self ) end
+		if players[5].instance_of? Player then players[5].set_this_week_score( table["wr2"], self ) end
+		if players[6].instance_of? Player then players[6].set_this_week_score( table["wr3"], self ) end
+		if players[7].instance_of? Player then players[7].set_this_week_score( table["te"],  self ) end
+		if players[8].instance_of? Player then players[8].set_this_week_score( table["k"],   self ) end
+
+		get_current_game.update_score_for( self, get_this_weeks_score )
+		save
+	end
+
 end

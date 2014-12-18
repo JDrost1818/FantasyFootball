@@ -6,6 +6,7 @@ class CreateGames < ActiveRecord::Migration
       t.integer :away_score, :default => 0
       t.integer :home_team_id
       t.integer :home_score, :default => 0
+      t.boolean :is_finished
 
       t.timestamps
     end

@@ -12,8 +12,9 @@ body { padding-top: 60px;
 
 }
 .wrapper {
-	min-height: 93.7vh;
+	min-height: 100vh;
 	min-width: 600px !important;
+	padding-bottom: 60px;
 
 }
 .trans-color {
@@ -92,8 +93,36 @@ body { padding-top: 60px;
     float:right;
 }
 
-#fa-to-team-link {
-	background-color: black;
+.boo {
 	text-align: left;
-	float: left;
+	margin-top: -30px;
+	margin-bottom: 20px;
+}
+
+#fa-to-team-link {
+	margin-left: 12%;
+}
+
+.sb-input {
+	width: 30px;
+	height: 30px;
+	text-align: center;
+}
+
+.btn-wide {
+	width: 200px;
+}
+
+.score-btn {
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+
+.pad-btn {
+	margin-right: 3px;
+	margin-bottom: 15px;
+}
+
+.pull-up-btn {
+	margin-top: -100px;
 }

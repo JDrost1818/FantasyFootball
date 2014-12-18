@@ -1,24 +1,160 @@
  <%= form_for @team, :html => { :class => 'form-horizontal' } do |f| %>
 	 <% @is_sb = true %>
-	 <table class="table table-striped">
-	  <thead>
-	    <tr>
-	      <th>Pos</th>
-	      <th align="center">Player, NFL Team</th>
-	      <th align="center">Points</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <% player_list = @team.get_formatted_player_list %>
-	    <% player_list.each do |player| %>
-	      <% if player.instance_of? Player %>
-	        <% @player = player %>
-	        <%= render 'filled_slot', locals: {player: @player, is_sb: @is_sb } %>
-	      <% else %>
-	        <% @string = player %>
-	        <%= render 'empty_slot', locals: {string: @string} %>
-	      <% end %>
-	    <% end %>
-	  </tbody>
-	</table>
+	 <div>
+		 <table class="table table-striped">
+		  <thead>
+		    <tr>
+		      <th>Pos</th>
+		      <th style="text-align:center">Player, NFL Team</th>
+		      <th style="text-align:center">Points</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <% player_list = @team.get_formatted_player_list %>
+		    
+		    <!-- QB -->
+		    <tr>
+		    	<td>QB</td>
+			    <% if player_list[0].instance_of? Player then %>
+			    	<% @player = player_list[0] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :qb, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center"><%= link_to "Add",
+			      	  		{ :action => "free_agency", :id => params[:id], :tab => "QB" }, 
+			      			{ :align=>"center", :class=>"btn btn-sm btn-success score-btn" } %></td>
+			    <% end %>
+			</tr>
+
+		    <!-- RB -->
+		    <tr>
+		    	<td>RB</td>
+			    <% if player_list[1].instance_of? Player then %>
+			    	<% @player = player_list[1] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :rb1, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center"><%= link_to "Add",
+			      	  		{ :action => "free_agency", :id => params[:id], :tab => "RB" }, 
+			      			{ :align=>"center", :class=>"btn btn-sm btn-success score-btn" } %></td>
+			    <% end %>
+			</tr>
+
+			<tr>
+		    	<td>RB</td>
+			    <% if player_list[2].instance_of? Player then %>
+			    	<% @player = player_list[2] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :rb2, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center"><%= link_to "Add",
+			      	  		{ :action => "free_agency", :id => params[:id], :tab => "RB" }, 
+			      			{ :align=>"center", :class=>"btn btn-sm btn-success score-btn" } %></td>
+			    <% end %>
+			</tr>
+
+			<tr>
+		    	<td>RB</td>
+			    <% if player_list[3].instance_of? Player then %>
+			    	<% @player = player_list[3] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :rb3, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center"><%= link_to "Add",
+			      	  		{ :action => "free_agency", :id => params[:id], :tab => "RB" }, 
+			      			{ :align=>"center", :class=>"btn btn-sm btn-success score-btn" } %></td>
+			    <% end %>
+			</tr>
+
+
+		    <!-- WR -->
+		    <tr>
+		    	<td>WR</td>
+			    <% if player_list[4].instance_of? Player then %>
+			    	<% @player = player_list[4] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :wr1, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center"><%= link_to "Add",
+			      	  		{ :action => "free_agency", :id => params[:id], :tab => "WR" }, 
+			      			{ :align=>"center", :class=>"btn btn-sm btn-success score-btn" } %></td>
+			    <% end %>
+			</tr>
+
+			<tr>
+		    	<td>WR</td>
+			    <% if player_list[5].instance_of? Player then %>
+			    	<% @player = player_list[5] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :wr2, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center"><%= link_to "Add",
+			      	  		{ :action => "free_agency", :id => params[:id], :tab => "WR" }, 
+			      			{ :align=>"center", :class=>"btn btn-sm btn-success score-btn" } %></td>
+			    <% end %>
+			</tr>
+
+			<tr>
+		    	<td>WR</td>
+			    <% if player_list[6].instance_of? Player then %>
+			    	<% @player = player_list[6] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :wr3, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center"><%= link_to "Add",
+			      	  		{ :action => "free_agency", :id => params[:id], :tab => "WR" }, 
+			      			{ :align=>"center", :class=>"btn btn-sm btn-success score-btn" } %></td>
+			    <% end %>
+			</tr>
+
+		    <!-- TE -->
+		    <tr>
+		    	<td>TE</td>
+			    <% if player_list[7].instance_of? Player then %>
+			    	<% @player = player_list[7] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :te, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center"><%= link_to "Add",
+			      	  		{ :action => "free_agency", :id => params[:id], :tab => "TE" }, 
+			      			{ :align=>"center", :class=>"btn btn-sm btn-success score-btn" } %></td>
+			    <% end %>
+			</tr>
+
+		    <!-- K -->
+		    <tr>
+		    	<td>K</td>
+			    <% if player_list[8].instance_of? Player then %>
+			    	<% @player = player_list[8] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :k, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center"><%= link_to "Add",
+			      	  		{ :action => "free_agency", :id => params[:id], :tab => "K" }, 
+			      			{ :align=>"center", :class=>"btn btn-sm btn-success score-btn" } %></td>
+			    <% end %>
+			</tr>
+		  </tbody>
+		</table>
+	  <%= f.submit "Save", :class => 'btn btn-lg btn-success btn-wide', :onclick=>"show", :controller => "team"  %>
+	</div>
+	
 <% end %>

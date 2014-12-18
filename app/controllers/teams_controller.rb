@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy, :free_agency, :add_player]
-
+  before_action :verify_ownership, only: [:show, :edit, :update, :destroy, :free_agency, :add_player]
   # GET /teams
   # GET /teams.json
   def index
@@ -10,6 +10,7 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
+    puts "\n\n\n\nPosition = #{params[:qb]}\n\n\n\n"
   end
 
   # GET /teams/1/rem_player/1
@@ -29,7 +30,7 @@ class TeamsController < ApplicationController
     elsif error == 1
       redirect_to :back, alert: "Unable to add #{new_player.full_name}. "\
                                  "Please drop a #{new_player.position} to make room."
-    elsif error = 2
+    elsif error == 2
       redirect_to :back, alert: "You do not have enough cap space to " \
                                 "sign #{new_player.full_name}"
     end
@@ -81,9 +82,12 @@ class TeamsController < ApplicationController
   # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
   def update
+    @user = User.find(@team.user_id)
+    @team.update_by_hash params[:team]
+
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to @team, notice: 'Team was successfully updated.' }
+        format.html { redirect_to "/", notice: 'Team was successfully updated.' }
         format.json { render :show, status: :ok, location: @team }
       else
         format.html { render :edit }
@@ -108,8 +112,18 @@ class TeamsController < ApplicationController
       @team = Team.find(params[:id])
     end
 
+    def verify_ownership
+      @is_owner = @team.user_id == current_user.id
+      # This should eventually be handled differently in 
+      # each method. For example, in #show, would be nice
+      # to show the user without editing options
+      if !@is_owner then 
+        redirect_to root_path, alert: "You must own the team to navigate there"
+      end
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.permit(:team, :name, :league_id, :player_id)
+      params.permit(:team, :name, :league_id, :player_id, :qb, :rb1, :rb2, :rb3, :wr1, :wr2, :wr3, :te, :k)
     end
 end

@@ -1,0 +1,25 @@
+<%= form_for @team, :html => { :class => 'form-horizontal' } do |f| %>
+	<% @other_team = @game.get_other_team @team %>
+	<table class="scoreboard">
+		<h2><%= "Week #{@game.week}" %></h2>
+		<div width="100%" class="scoreboard">
+		    <tr>
+		      <th class="sb-top-left h3">
+		      	<%= @game.get_score_for_one @team %></th>
+		      <th class="sb-top-right h3">
+		      	<%= @team.name %></th>
+		      <th class="sb-top-left h3">
+		      	<%= @other_team.name %></th>
+		      <th class="sb-top-right h3">
+		      	<%= @game.get_score_for_one @other_team %></th>
+		    </tr>
+		</div>
+	</table>
+
+	<div id='parent_div_1'>
+		<%= render 'scoreboard_roster' %>
+	</div>
+	<div id='parent_div_2'>
+		<%= render 'other_scoreboard_roster' %>
+	</div>
+<% end %>

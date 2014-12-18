@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   end
   get 'leagues/:id/addteam' => 'leagues#addteam'
   get 'leagues/:id/close' => 'leagues#close'
+  get 'leagues/:id/advance_week' => "leagues#advance_week"
 
   root "users#index"
 
