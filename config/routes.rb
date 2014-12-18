@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get 'leagues/:id/close' => 'leagues#close'
   get 'leagues/:id/advance_week' => "leagues#advance_week"
 
-  root "users#index"
+  root "users#show"
 
 
   # The priority is based upon order of creation: first created -> highest priority.

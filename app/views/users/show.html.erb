@@ -1,28 +1,56 @@
 <%- model_class = User -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+<div class="jumbotron custom-jumbotron">
+  <h1 align="center"><%=t '.title', :default => "Welcome " + current_user.first_name + "," %></h1>
+  <p align="center">To get started you can create a league, join a league, or manage teams you have already created.</p>
+  <p align="center"><a class="btn btn-success btn-lg" href="/leagues/new">Create League</a>
+  <a class="btn btn-warning btn-lg" href="/leagues">Join League</a></p>
 </div>
 
-<div class="fieldset">
-  <dl>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:first_name) %></dt>
-      <dd><pre class="prettyprint"><%= @user.first_name %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:last_name) %></dt>
-      <dd><pre class="prettyprint"><%= @user.last_name %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:email) %></dt>
-      <dd><pre class="prettyprint"><%= @user.email %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:encrypted_password) %></dt>
-  </dl>
-</div>
 
-<div class="form-group">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              users_path, :class => 'btn btn-default'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_user_path(@user), :class => 'btn btn-default' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              user_path(@user),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-</div>
+<!-- Leagues User Owns -->
+<h1 class="custom-header" align="left">Owned Leagues</h1>
+<table class="table table-striped custom-table v-space-lg">
+  <thead>
+    <tr>
+      <th>League Name</th>
+      <th>Number of Teams</th>
+      <th>Week</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% owned_leagues = League.where("league_owner_id = ?", current_user.id) %>
+    <% if owned_leagues.nil? then %>
+      <h1>You are not the owner of any leagues</h1>
+    <% else %>
+      <% owned_leagues.each do |league| %>
+        <tr>
+          <td><%= link_to league.name, league_path(league) %></td>
+          <td><%= league.teams.length %></td>
+          <td><%= league.current_week %></td>
+        </tr>
+      <% end %>
+    
+    <% end %>
+  </tbody>
+</table>
+
+<!-- Teams User Owns -->
+<h1 class="custom-header" align="left">Owned Teams</h1>
+<table class="table table-striped custom-table">
+  <thead>
+    <tr>
+      <th>Team Name</th>
+      <th>League</th>
+      <th>Record</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% current_user.teams.each do |team| %>
+      <tr>
+        <td><%= link_to team.name, team_path(team) %></td>
+        <td><%= team.league.name %></td>
+        <td><%= team.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

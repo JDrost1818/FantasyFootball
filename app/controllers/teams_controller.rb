@@ -81,11 +81,15 @@ class TeamsController < ApplicationController
   # PATCH/PUT /teams/1
   # PATCH/PUT /teams/1.json
   def update
-    @user = User.find(@team.user_id)
-    @team.update_by_hash params[:team]
+    if params[:commit] == "Update Team" then
+      @team.name = params[:team][:name]
+    else
+      @user = User.find(@team.user_id)
+      @team.update_by_hash params[:team]
+    end
 
     respond_to do |format|
-      if @team.update(team_params)
+      if @team.save
         format.html { redirect_to "/", notice: 'Team was successfully updated.' }
         format.json { render :show, status: :ok, location: @team }
       else
