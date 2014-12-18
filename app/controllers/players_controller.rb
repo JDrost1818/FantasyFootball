@@ -9,8 +9,12 @@ class PlayersController < ApplicationController
 
   # GET leagues/1/players/1
   def show
-    @league = Team.find(params[:team_id]).league
-    @stats = @player.get_stats_for_league(@league.id)
+    if params[:team_id] then
+      @league = Team.find(params[:team_id]).league
+      @stats = @player.get_stats_for_league(@league.id)
+    else 
+      redirect_to :back, alert: 'Must view a player while viewing a team'
+    end
   end
 
   # GET /players/new
