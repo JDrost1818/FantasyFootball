@@ -76,9 +76,10 @@ class LeaguesController < ApplicationController
   # PATCH/PUT /leagues/1
   # PATCH/PUT /leagues/1.json
   def update
+    @user_team = Team.where("league_id = ?", @league.id)[0]
     respond_to do |format|
       if @league.update(league_params)
-        format.html { redirect_to @league, notice: 'League was successfully updated.' }
+        format.html { redirect_to team_path(@user_team.id), notice: 'League was successfully updated.' }
         format.json { render :show, status: :ok, location: @league }
       else
         format.html { render :edit }
