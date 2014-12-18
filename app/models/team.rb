@@ -26,7 +26,19 @@ class Team < ActiveRecord::Base
 	end
 
 	def get_current_game
-		return get_game_by_week(league.current_week)
+		return get_game_by_week(self.league.current_week)
+	end
+
+	def get_win_loss_message
+		cur_game = get_current_game
+		team2 = cur_game.get_other_team(self)
+		if cur_game.winner? self then
+			"You defeated #{team2.name} #{cur_game.get_score_for_one self} - #{cur_game.get_score_for_one team2}!"  
+		elsif cur_game.winner?(self).nil? then
+			"You lost to #{team2.name} #{cur_game.get_score_for_one self} - #{cur_game.get_score_for_one team2}." 
+		else
+			"You Tied #{team2.name} #{cur_game.get_score_for_one self} - #{cur_game.get_score_for_one team2}." 
+		end
 	end
 
 	def games
@@ -34,7 +46,11 @@ class Team < ActiveRecord::Base
 	end
 
 	def league
-		League.find(league_id)
+		League.find(self.league_id)
+	end
+
+	def user
+		User.find(self.user_id)
 	end
 
 	def get_game_by_week week 

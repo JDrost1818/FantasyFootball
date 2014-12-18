@@ -12,6 +12,7 @@ class League < ActiveRecord::Base
 
 	def advance_week
 		self.teams.each do |team|
+			UserMailer.weekly_email(team).deliver
 			team.get_current_game.close
 		end
 		self.current_week += 1
@@ -19,28 +20,30 @@ class League < ActiveRecord::Base
 	end
 
 	def set_schedule
-		teams.each do |team1|
+		self.teams.each do |team1|
 			max_matchups = 1
 			(1..16).each do |week|
-				if week == teams.length then max_matchups += 1 end
-				teams.each do |team2|
-					if team1 != team2 and
-						team1.get_game_by_week(week).nil? and
-						team2.get_game_by_week(week).nil? and
-						team1.get_num_matchups(team2) < max_matchups then
+				if team1.get_game_by_week(week).nil? then
+					self.teams.each do |team2|
+						if team1 != team2 and
+							team2.get_game_by_week(week).nil? and
+							team1.get_num_matchups(team2) < max_matchups then
 
-						away_team = rand(2) == 1 ? team1 : team2
-						home_team = team1 == away_team ? team2 : team1
+							away_team = (rand(2) == 1) ? team1 : team2
+							home_team = (team1 == away_team) ? team2 : team1
 
-						new_game = Game.create!(:away_team => away_team, 
-									 			:home_team => home_team, 
-									 			:week => week)
-						team1.games << new_game
-						team2.games << new_game
-						team1.save
-						team2.save
+							new_game = Game.create!(:away_team => away_team, 
+										 			:home_team => home_team, 
+										 			:week => week)
+							team1.games << new_game
+							team2.games << new_game
+							team1.save
+							team2.save
+							break
+						end
 					end
 				end
+				if ((week % (self.teams.length-1)) == 0) then max_matchups += 1 end
 			end
 		end
 	end

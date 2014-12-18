@@ -29,7 +29,8 @@ class LeaguesController < ApplicationController
 
   def advance_week
     @league.advance_week
-    redirect_to :back
+    @team = Team.where("user_id = ? AND league_id = ?", current_user.id, @league.id)[0]
+    redirect_to :action => "show", :id => @team.id, :controller => "teams"
   end
 
   # GET /leagues/new

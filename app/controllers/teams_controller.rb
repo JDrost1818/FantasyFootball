@@ -10,7 +10,6 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
-    puts "\n\n\n\nPosition = #{params[:qb]}\n\n\n\n"
   end
 
   # GET /teams/1/rem_player/1

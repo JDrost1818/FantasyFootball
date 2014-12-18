@@ -1,0 +1,187 @@
+<%= form_for @team, :html => { :class => 'form-horizontal' } do |f| %>
+	<% @other_team = @game.get_other_team @team %>
+	<table class="scoreboard">
+		<h2><%= "Week #{@game.week}" %></h2>
+		<div width="100%" class="scoreboard">
+		    <tr>
+		      <th class="sb-top-left h3">
+		      	<%= @game.get_score_for_one @team %></th>
+		      <th class="sb-top-right h3">
+		      	<%= @team.name %></th>
+		      <th class="sb-top-left h3">
+		      	<%= @other_team.name %></th>
+		      <th class="sb-top-right h3">
+		      	<%= @game.get_score_for_one @other_team %></th>
+		    </tr>
+		</div>
+	</table>
+
+	  <div id='parent_div_1'>
+		<table class="table table-striped">
+		  <thead>
+		    <tr>
+		      <th>Pos</th>
+		      <th style="text-align:center">Player, NFL Team</th>
+		      <th style="text-align:center">Points</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <% player_list = @team.get_formatted_player_list %>
+		    
+		    <!-- QB -->
+		    <tr>
+		    	<td>QB</td>
+			    <% if player_list[0].instance_of? Player then %>
+			    	<% @player = player_list[0] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :qb, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center">0</td>
+			    <% end %>
+			</tr>
+
+		    <!-- RB -->
+		    <tr>
+		    	<td>RB</td>
+			    <% if player_list[1].instance_of? Player then %>
+			    	<% @player = player_list[1] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :rb1, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center">0</td>
+			    <% end %>
+			</tr>
+
+			<tr>
+		    	<td>RB</td>
+			    <% if player_list[2].instance_of? Player then %>
+			    	<% @player = player_list[2] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :rb2, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center">0</td>
+			    <% end %>
+			</tr>
+
+			<tr>
+		    	<td>RB</td>
+			    <% if player_list[3].instance_of? Player then %>
+			    	<% @player = player_list[3] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :rb3, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center">0</td>
+			    <% end %>
+			</tr>
+
+
+		    <!-- WR -->
+		    <tr>
+		    	<td>WR</td>
+			    <% if player_list[4].instance_of? Player then %>
+			    	<% @player = player_list[4] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :wr1, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center">0</td>
+			    <% end %>
+			</tr>
+
+			<tr>
+		    	<td>WR</td>
+			    <% if player_list[5].instance_of? Player then %>
+			    	<% @player = player_list[5] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :wr2, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center">0</td>
+			    <% end %>
+			</tr>
+
+			<tr>
+		    	<td>WR</td>
+			    <% if player_list[6].instance_of? Player then %>
+			    	<% @player = player_list[6] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :wr3, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center">0</td>
+			    <% end %>
+			</tr>
+
+		    <!-- TE -->
+		    <tr>
+		    	<td>TE</td>
+			    <% if player_list[7].instance_of? Player then %>
+			    	<% @player = player_list[7] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :te, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center">0</td>
+			    <% end %>
+			</tr>
+
+		    <!-- K -->
+		    <tr>
+		    	<td>K</td>
+			    <% if player_list[8].instance_of? Player then %>
+			    	<% @player = player_list[8] %>
+			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+				    <td align="middle">
+			  			<%= f.text_field :k, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
+			    <% else %>
+			    	<td>Empty</td>
+			    	<td align="center">0</td>
+			    <% end %>
+			</tr>
+		  </tbody>
+		</table>
+	  </div>
+
+	  <div id='parent_div_2'>
+		<table class="table table-striped">
+		  <thead>
+		    <tr>
+		      <th>Pos</th>
+		      <th style="text-align:center">Player, NFL Team</th>
+		      <th style="text-align:center">Points</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <% player_list = @other_team.get_formatted_player_list %>
+		    <% player_list.each do |player| %>
+			    <tr>
+				    <% if player.instance_of? Player then %>    	
+				    	<td><%= player.position %></td>
+					    <td align="middle">
+				  			<input class="sb-input" id="focusedInput" type="text" value=<%= player.get_current_week_stat_for(@team) %> disabled>
+				  	  	</td>
+				    <% else %>
+				    	<td><%= player %></td>
+				    	<td>Empty</td>
+				    	<td align="middle">
+				  			<input class="sb-input" id="focusedInput" type="text" value="0" disabled>
+				  	  	</td>
+				    <% end %>
+				</tr>
+			<% end %>
+		  </tbody>
+		</table>
+	  </div>
+<% end %>

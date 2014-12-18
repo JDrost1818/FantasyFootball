@@ -3,7 +3,7 @@ class Game < ActiveRecord::Base
 	belongs_to :home_team, :foreign_key => 'home_team_id', :class_name => "Team"
 
 	def winner? team
-		(team == away_team) ? away_score > home_score : home_team_score > away_team_score
+		(team == away_team) ? away_score > home_score : home_score > away_score
 	end
 
 	def get_winner
