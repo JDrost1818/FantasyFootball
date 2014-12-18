@@ -7,9 +7,10 @@ class PlayersController < ApplicationController
     @players = Player.all
   end
 
-  # GET /players/1
-  # GET /players/1.json
+  # GET leagues/1/players/1
   def show
+    @league = Team.find(params[:team_id]).league
+    @stats = @player.get_stats_for_league(leauge.id)
   end
 
   # GET /players/new

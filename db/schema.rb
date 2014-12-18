@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20141215230442) do
     t.integer  "league_owner_id"
     t.string   "description"
     t.string   "name"
-    t.integer  "salary_cap"
+    t.integer  "salary_cap",               default: 75000
     t.boolean  "is_open_for_registration", default: true
     t.integer  "current_week",             default: 1
     t.datetime "created_at"

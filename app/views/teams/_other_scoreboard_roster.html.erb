@@ -15,6 +15,7 @@
 		    <tr>
 			    <% if player.instance_of? Player then %>    	
 			    	<td><%= player.position %></td>
+			    	<td><%= link_to player.full_name, player_path(player) %><%= ", #{player.nfl_team}"%></td>
 				    <td align="middle">
 			  			<input class="sb-input" id="focusedInput" type="text" value=<%= player.get_current_week_stat_for(@team) %> disabled>
 			  	  	</td>

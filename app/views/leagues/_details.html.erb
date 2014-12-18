@@ -4,7 +4,7 @@
       <% if @league.is_open_for_registration then %>
         <%=link_to "Close Registration", 
         			 { :action => "close", :id => @league.id, :controller => :leagues }, 
-        			 { :align=>"left", :class=>"btn btn-danger pull-left"} %>
+        			 { :align=>"left", :class=>"btn btn-danger pull-left v-space"} %>
       <% else %>
         <div>
           <%=link_to "Advance Week", 
@@ -15,9 +15,7 @@
                  { :align=>"left", :class=>"btn btn-default pull-left"} %>
         </div>
       <% end %>
-	<% else %>
-	  <h2 align="left"><%=t '.title', :default => @league.name %></h2>
-	<% end %>
+	  <% end %>
   </div>
 
   <table class="table table-striped">

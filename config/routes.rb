@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :games
 
   resources :players
+  get 'teams/:team_id/view_player/:id' => 'player#show'
 
   resources :users
 

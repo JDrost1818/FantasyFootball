@@ -28,8 +28,18 @@ class LeaguesController < ApplicationController
   end
 
   def advance_week
+
+    #
+    #
+    # This take entirely too long. I wish that I could
+    # get Sidekiq to work... (Really happens in League.advance_week method)
+    #
+    #
+    #
+
     @league.advance_week
     @team = Team.where("user_id = ? AND league_id = ?", current_user.id, @league.id)[0]
+    flash[:notice] = "Thank you for waiting"
     redirect_to :action => "show", :id => @team.id, :controller => "teams"
   end
 

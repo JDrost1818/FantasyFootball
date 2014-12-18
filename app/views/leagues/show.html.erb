@@ -1,2 +1,7 @@
 <%- model_class = League -%>
-<%= render :partial => 'details' %>
+<div class="container custom-header">
+    <h1 class="pull-left"><%= "#{@league.name}"%></h1>
+</div>
+<div class="custom-table">
+	<%= render :partial => 'details' %>
+</div>

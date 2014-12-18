@@ -12,7 +12,9 @@
    
     <div class="form-group" align='left'>
       <div class="col-lg-10 col-lg-offset-2">
-        <button class="btn btn-default">Cancel</button>
+        <%= link_to "Cancel",
+            { :action => "index"}, 
+            { :align=>"center", :class=>"btn btn-default" } %>
         <input name="commit" type="submit" value="Join League" class="btn btn-success" />
       </div>
     </div>
