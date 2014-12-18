@@ -39,11 +39,11 @@
     </tr>
   </thead>
   <tbody>
-    <% stats = @player.stats.sort { |a, b| a.week <=> b.week} %>
+    <% @stats = @stats.sort { |a, b| a.week <=> b.week} %>
     <tr>
     <% 16.times do |week| %>
-      <% if week < stats.length then %>
-        <td><%= stats[week].points %></td>
+      <% if week < @stats.length then %>
+        <td><%= @stats[week].points %></td>
       <% else %>
         <td>-</td>
       <% end %>

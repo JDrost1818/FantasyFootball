@@ -31,10 +31,6 @@ class Player < ActiveRecord::Base
 	end
 
 	def get_stats_for_league league_id
-		stats = []
-		self.stats.each do |stat|
-			if stats.for_league_id == league_id then stats.push(stat) end
-		end
-		return stats
+		Stat.where("for_league_id = ? AND player_id = ?", league_id, self.id)
 	end
 end

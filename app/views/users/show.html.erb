@@ -49,7 +49,7 @@
       <tr>
         <td><%= link_to team.name, team_path(team) %></td>
         <td><%= team.league.name %></td>
-        <td><%= team.name %></td>
+        <td><%= team.get_record %></td>
       </tr>
     <% end %>
   </tbody>

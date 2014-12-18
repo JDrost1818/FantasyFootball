@@ -17,7 +17,9 @@
 		    	<td>QB</td>
 			    <% if player_list[0].instance_of? Player then %>
 			    	<% @player = player_list[0] %>
-			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+			    	<td><%= link_to @player.full_name, 
+                         	{ :action => "show", :team_id => @team.id, :id => @player.id, :controller=>"players" }, 
+                         	{ :align=>"left"}%><%= ", #{@player.nfl_team}"%></td>
 				    <td align="middle">
 			  			<%= f.text_field :qb, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
 			    <% else %>
@@ -33,7 +35,9 @@
 		    	<td>RB</td>
 			    <% if player_list[1].instance_of? Player then %>
 			    	<% @player = player_list[1] %>
-			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+			    	<td><%= link_to @player.full_name, 
+                         	{ :action => "show", :team_id => @team.id, :id => @player.id, :controller=>"players" }, 
+                         	{ :align=>"left"}%><%= ", #{@player.nfl_team}"%></td>
 				    <td align="middle">
 			  			<%= f.text_field :rb1, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
 			    <% else %>
@@ -48,7 +52,9 @@
 		    	<td>RB</td>
 			    <% if player_list[2].instance_of? Player then %>
 			    	<% @player = player_list[2] %>
-			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+			    	<td><%= link_to @player.full_name, 
+                         	{ :action => "show", :team_id => @team.id, :id => @player.id, :controller=>"players" }, 
+                         	{ :align=>"left"}%><%= ", #{@player.nfl_team}"%></td>
 				    <td align="middle">
 			  			<%= f.text_field :rb2, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
 			    <% else %>
@@ -63,7 +69,9 @@
 		    	<td>RB</td>
 			    <% if player_list[3].instance_of? Player then %>
 			    	<% @player = player_list[3] %>
-			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+			    	<td><%= link_to @player.full_name, 
+                         	{ :action => "show", :team_id => @team.id, :id => @player.id, :controller=>"players" }, 
+                         	{ :align=>"left"}%><%= ", #{@player.nfl_team}"%></td>
 				    <td align="middle">
 			  			<%= f.text_field :rb3, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
 			    <% else %>
@@ -80,7 +88,9 @@
 		    	<td>WR</td>
 			    <% if player_list[4].instance_of? Player then %>
 			    	<% @player = player_list[4] %>
-			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+			    	<td><%= link_to @player.full_name, 
+                         	{ :action => "show", :team_id => @team.id, :id => @player.id, :controller=>"players" }, 
+                         	{ :align=>"left"}%><%= ", #{@player.nfl_team}"%></td>
 				    <td align="middle">
 			  			<%= f.text_field :wr1, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
 			    <% else %>
@@ -95,7 +105,9 @@
 		    	<td>WR</td>
 			    <% if player_list[5].instance_of? Player then %>
 			    	<% @player = player_list[5] %>
-			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+			    	<td><%= link_to @player.full_name, 
+                         	{ :action => "show", :team_id => @team.id, :id => @player.id, :controller=>"players" }, 
+                         	{ :align=>"left"}%><%= ", #{@player.nfl_team}"%></td>
 				    <td align="middle">
 			  			<%= f.text_field :wr2, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
 			    <% else %>
@@ -110,7 +122,9 @@
 		    	<td>WR</td>
 			    <% if player_list[6].instance_of? Player then %>
 			    	<% @player = player_list[6] %>
-			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+			    	<td><%= link_to @player.full_name, 
+                         	{ :action => "show", :team_id => @team.id, :id => @player.id, :controller=>"players" }, 
+                         	{ :align=>"left"}%><%= ", #{@player.nfl_team}"%></td>
 				    <td align="middle">
 			  			<%= f.text_field :wr3, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
 			    <% else %>
@@ -126,7 +140,9 @@
 		    	<td>TE</td>
 			    <% if player_list[7].instance_of? Player then %>
 			    	<% @player = player_list[7] %>
-			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+			    	<td><%= link_to @player.full_name, 
+                         	{ :action => "show", :team_id => @team.id, :id => @player.id, :controller=>"players" }, 
+                         	{ :align=>"left"}%><%= ", #{@player.nfl_team}"%></td>
 				    <td align="middle">
 			  			<%= f.text_field :te, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
 			    <% else %>
@@ -142,7 +158,9 @@
 		    	<td>K</td>
 			    <% if player_list[8].instance_of? Player then %>
 			    	<% @player = player_list[8] %>
-			    	<td><%= link_to @player.full_name, player_path(@player) %><%= ", #{@player.nfl_team}"%></td>
+			    	<td><%= link_to @player.full_name, 
+                         	{ :action => "show", :team_id => @team.id, :id => @player.id, :controller=>"players" }, 
+                         	{ :align=>"left"}%><%= ", #{@player.nfl_team}"%></td>
 				    <td align="middle">
 			  			<%= f.text_field :k, :id => "focusedInput", :class=>"sb-input", :value=>@player.get_current_week_stat_for(@team) %></td>
 			    <% else %>

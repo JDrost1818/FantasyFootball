@@ -10,7 +10,7 @@ class PlayersController < ApplicationController
   # GET leagues/1/players/1
   def show
     @league = Team.find(params[:team_id]).league
-    @stats = @player.get_stats_for_league(leauge.id)
+    @stats = @player.get_stats_for_league(@league.id)
   end
 
   # GET /players/new
