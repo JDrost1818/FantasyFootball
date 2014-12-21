@@ -6,6 +6,14 @@ class Player < ActiveRecord::Base
 		first_name + " " + last_name
 	end
 
+	def average_points
+		total = 0
+		self.stats.each do |stat|
+			total += stat.points
+		end
+		return total / self.stats.length
+	end
+
 	def get_stat_by_week week, team
 		self.stats.each do |weekly_stat|
 			if weekly_stat.week == week and weekly_stat.for_league_id == team.league_id then

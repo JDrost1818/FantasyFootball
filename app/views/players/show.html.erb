@@ -1,53 +1,65 @@
 <%- model_class = Player -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+<div class="container custom-header">
+    <h1 align="left"><%= "#{@player.position} - #{@player.full_name}"%></h1>
+    <p  align="left"><%= "Average Points #{@player.average_points}"%><p>
 </div>
 
-<div class="fieldset">
-  <dl>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:first_name) %></dt>
-      <dd><pre class="prettyprint"><%= @player.first_name %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:last_name) %></dt>
-      <dd><pre class="prettyprint"><%= @player.last_name %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:position) %></dt>
-      <dd><pre class="prettyprint"><%= @player.position %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:salary) %></dt>
-      <dd><pre class="prettyprint"><%= @player.salary %></pre></dd>
-      <dt class="label label-default"><%= model_class.human_attribute_name(:team_id) %></dt>
-      <dd><pre class="prettyprint"><%= @player.team_id %></pre></dd>
-  </dl>
+<!--- Team doesn't matter -->
+<% @team = Team.find(params[:team_id]) %>
+<% (1..@league.current_week).each do |week| %>
+  <% if @player.get_stat_by_week(week, @team).nil? then %>
+    <% @player.stats << Stat.create!(:week => week, :for_league_id => @league.id) %>
+    <% @player.save %>
+  <% end %>
+<% end %>
+
+<div class="custom-table">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <% (1..8).each do |num| %>
+          <th><%= "Week #{num}" %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      <% (1..8).each do |week| %>
+        <% if week-1 < @stats.length then %>
+            <td><%= @player.get_stat_by_week(week, @team).points %></td>
+        <% else %>
+          <td>-</td>
+        <% end %>
+      <% end %>
+      </tr>
+    </tbody>
+  </table>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <% (9..16).each do |num| %>
+          <th><%= "Week #{num}" %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      <% (8..15).each do |week| %>
+        <% if week < @stats.length then %>
+          <% if @stats[week-1].week == week then %>
+            <td><%= @player.get_stat_by_week(week, @team).points %></td>
+          <% end %>
+        <% else %>
+          <td>-</td>
+        <% end %>
+      <% end %>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <div class="form-group">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              players_path, :class => 'btn btn-default'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_player_path(@player), :class => 'btn btn-default' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              player_path(@player),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+  <%= link_to "Back", { :action => "show", :id => params[:team_id], :controller => "teams" },
+                      { :class => "btn btn-primary"}%>
 </div>
-
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <% 16.times do |num| %>
-        <th><%= "Week #{num + 1}" %></th>
-      <% end %> 
-    </tr>
-  </thead>
-  <tbody>
-    <% @stats = @stats.sort { |a, b| a.week <=> b.week} %>
-    <tr>
-    <% 16.times do |week| %>
-      <% if week < @stats.length then %>
-        <td><%= @stats[week].points %></td>
-      <% else %>
-        <td>-</td>
-      <% end %>
-    <% end %>
-    </tr>
-  </tbody>
-</table>
