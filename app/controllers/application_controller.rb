@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
       else
         format.html { render :new }
         format.json { render json: model.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def update_object model, params
@@ -25,6 +27,8 @@ class ApplicationController < ActionController::Base
       else
         format.html { render :edit }
         format.json { render json: model.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy_object model
