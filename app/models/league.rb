@@ -34,8 +34,8 @@ class League < ActiveRecord::Base
 				home_team = part_teams[1 - home_away_key][team]
 
 				new_game = Game.create!(:away_team => away_team,
-				:home_team => home_team,
-				:week => week)
+																:home_team => home_team,
+																:week => week)
 				away_team.games << new_game
 				home_team.games << new_game
 			end
