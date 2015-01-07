@@ -9,20 +9,18 @@ class Team < ActiveRecord::Base
 
   def get_record
     wins = 0; losses = 0; ties = 0;
-      games.sort { |a,b| a.week <=> b.week }.each do |cur_game|
+      games.each do |cur_game|
         if cur_game.week < league.current_week then
-          if cur_game.get_winner == self then wins += 1
-          elsif cur_game.get_winner.nil? then ties += 1
+          winner == cur_game.get_winner
+
+          if winner == self then wins += 1
+          elsif winner.nil? then ties += 1
           else losses += 1
-          end
+          end  
         end
       end
 
-      if ties > 0 then
-        return "#{wins}-#{losses}-#{ties}"
-      else
-        return "#{wins}-#{losses}"
-      end
+    return "#{wins}-#{losses}-#{ties}"
   end
 
   def get_current_game
@@ -175,8 +173,6 @@ class Team < ActiveRecord::Base
 
   def update_by_hash table
     players = get_formatted_player_list
-
-    puts "\n\n\n\nWhat #{table["qb"]}\n\n\n\n}"
 
     if players[0].instance_of? Player then players[0].set_this_week_score( table["qb"] , self ) end
     if players[1].instance_of? Player then players[1].set_this_week_score( table["rb1"], self ) end
