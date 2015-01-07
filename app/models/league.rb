@@ -74,7 +74,7 @@ class League < ActiveRecord::Base
     qb = []; rb = []; wr = []; te = []; k = [];
     Player.all.each do |p|
       if (teams.to_a & p.teams).empty? then
-        if 		p.position == "QB" then qb.push p
+        if    p.position == "QB" then qb.push p
         elsif p.position == "RB" then rb.push p
         elsif p.position == "WR" then wr.push p
         elsif p.position == "TE" then te.push p
