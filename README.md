@@ -1,4 +1,6 @@
-== README
+Fantasy Football
+================
+
 [![Code Climate](https://codeclimate.com/github/JDrost1818/FantasyFootball/badges/gpa.svg)](https://codeclimate.com/github/JDrost1818/FantasyFootball)
 
 To run this, use Ruby 2.1.2<br>
