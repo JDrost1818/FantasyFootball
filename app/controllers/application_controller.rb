@@ -5,13 +5,23 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-  helper_method :destroy_object, :update_object
+  helper_method :handle_post_creation, :update_object, :destroy_object
+
+  def handle_post_creation model
+    respond_to do |format|
+      if mdoel.save
+        format.html { redirect_to model, notice: '#{model.class.name.titleize} was successfully created.' }
+        format.json { render :show, status: :created, location: model }
+      else
+        format.html { render :new }
+        format.json { render json: model.errors, status: :unprocessable_entity }
+  end
 
   def update_object model, params
     respond_to do |format|
       if model.update(params)
         format.html { redirect_to model, notice: '#{model.class.name.titleize} was successfully updated.' }
-        format.json { render :show, status: :ok, location: @game }
+        format.json { render :show, status: :ok, location: model }
       else
         format.html { render :edit }
         format.json { render json: model.errors, status: :unprocessable_entity }
