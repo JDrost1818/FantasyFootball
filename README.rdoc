@@ -1,9 +1,0 @@
-== README
-
-To run this, use Ruby 2.1.2
-Bundle the application
-While in the root directory, run "./reset_db" to configure the database
-Run "rails s"
-Navigate to "localhost:3000" to see the app.
-
-PS - I would check out the seed file in order to get default usernames/passwords.
