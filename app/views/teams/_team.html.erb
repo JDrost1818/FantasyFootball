@@ -7,6 +7,7 @@
   <% if not league.is_open_for_registration then %>
   	<td><%= team.get_current_game.get_other_team(team).name %></td>
   <% else %>
-  	<td> NA </td>
+  	<td> <%= link_to 'Destroy', team_path(team),
+    :confirm => 'Are you sure?', :method => :delete %> </td>
   <% end %>
 </tr>

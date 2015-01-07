@@ -5,9 +5,19 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def destroy_object model
+    model.destroy
+    respond_to do |format|
+      format.html { redirect_to :back, notice: "#{model.class.name.titleize} successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
   protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :password, :password_confirmation) }
   end
+
+  helper_method :destroy_object
 end

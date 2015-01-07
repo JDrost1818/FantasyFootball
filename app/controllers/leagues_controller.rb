@@ -14,7 +14,7 @@ class LeaguesController < ApplicationController
 
   def close
 
-    if @league.teams.length == 0 then 
+    if @league.teams.length == 0 then
       @league.delete
       redirect_to League, alert: "League deleted because it contained no teams"
     elsif @league.teams.length % 2 != 0 then
@@ -60,7 +60,7 @@ class LeaguesController < ApplicationController
   def create
     @league = League.new(league_params)
     @league.league_owner_id = current_user.id
-    
+
     respond_to do |format|
       if @league.save
         format.html { redirect_to :action => "addteam", :id => @league.id }
@@ -91,11 +91,7 @@ class LeaguesController < ApplicationController
   # DELETE /leagues/1
   # DELETE /leagues/1.json
   def destroy
-    @league.destroy
-    respond_to do |format|
-      format.html { redirect_to leagues_url, notice: 'League was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    destroy_object @league
   end
 
   private

@@ -12,7 +12,7 @@ class PlayersController < ApplicationController
     if params[:team_id] then
       @league = Team.find(params[:team_id]).league
       @stats = @player.get_stats_for_league(@league.id)
-    else 
+    else
       redirect_to :back, alert: 'Must view a player while viewing a team'
     end
   end
@@ -59,11 +59,7 @@ class PlayersController < ApplicationController
   # DELETE /players/1
   # DELETE /players/1.json
   def destroy
-    @player.destroy
-    respond_to do |format|
-      format.html { redirect_to players_url, notice: 'Player was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    destroy_object @player
   end
 
   private

@@ -34,7 +34,7 @@ class TeamsController < ApplicationController
                                 "sign #{new_player.full_name}"
     end
   end
-  
+
   # GET /teams/new
   def new
     @league = League.find(params[:league_id])
@@ -103,11 +103,7 @@ class TeamsController < ApplicationController
   # DELETE /teams/1
   # DELETE /teams/1.json
   def destroy
-    @team.destroy
-    respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    destroy_object @team
   end
 
   private
@@ -118,10 +114,10 @@ class TeamsController < ApplicationController
 
     def verify_ownership
       @is_owner = @team.user_id == current_user.id
-      # This should eventually be handled differently in 
+      # This should eventually be handled differently in
       # each method. For example, in #show, would be nice
       # to show the user without editing options
-      if !@is_owner then 
+      if !@is_owner then
         redirect_to root_path, alert: "You must own the team to navigate there"
       end
     end
