@@ -39,8 +39,11 @@ class League < ActiveRecord::Base
         away_team.games << new_game
         home_team.games << new_game
       end
-      # rotates inner circle of teams
+      # rotates teams
       last_team = part_teams[1].pop
+      part_teams[0].insert(1, last_team)
+
+      last_team = part_teams[0].pop
       part_teams[1].insert(0, last_team)
     end
   end

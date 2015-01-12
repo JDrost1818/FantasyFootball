@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :users
 
   resources :teams
+  get 'teams/:id/schedule' => 'teams#schedule'
   get 'teams/:id/add_player' => 'teams#free_agency'
   get 'teams/:id/add_player/:player_id' => 'teams#add_player'
   get 'teams/:id/rem_player/:player_id' => 'teams#rem_player'

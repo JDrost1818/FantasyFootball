@@ -1,5 +1,5 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy, :free_agency, :add_player]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :free_agency, :add_player, :schedule]
   before_action :verify_ownership, only: [:show, :edit, :update, :destroy, :free_agency, :add_player]
   # GET /teams
   # GET /teams.json
@@ -33,6 +33,9 @@ class TeamsController < ApplicationController
       redirect_to :back, alert: "You do not have enough cap space to " \
                                 "sign #{new_player.full_name}"
     end
+  end
+
+  def schedule
   end
 
   # GET /teams/new
