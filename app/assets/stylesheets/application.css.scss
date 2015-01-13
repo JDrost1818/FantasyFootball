@@ -22,7 +22,7 @@ body { padding-top: 60px;
 }
 
 .wrapper, .background-color {
-	background-color: #f0f0f0;
+	background-color: #FFF;
 }
 
 .log-in {
@@ -133,4 +133,9 @@ body { padding-top: 60px;
 
 .v-space-lg {
 	margin-bottom: 50px;
+}
+
+.picture_banner {
+	max-height: 75vh !important;
+	min-height: calc(100vh / 1.777777)
 }
