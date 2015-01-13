@@ -1,23 +1,26 @@
 <!-- Manages the main image banner on homescreen -->
+<% banner_pics = Dir.glob("#{Rails.root}/app/assets/images/home_banner/*") %>
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="6500" data-pause="">
   <!-- Indicators -->
   <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+    <% banner_pics.length.times do |num| %>
+      <li data-target="#carousel-example-generic" data-slide-to=<%= num %> <%= if num == 0 then "class=active" end%></li>
+    <% end %>
   </ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner picture_banner" role="listbox">
+    <% lead_photo = banner_pics.shift %>
     <div class="item active">
-      <img src="/assets/pic1.jpg"/>
+      <img src=<%= "/assets/home_banner/#{lead_photo.split('/').last}" %>/>
     </div>
-    <div class="item">
-      <img src="/assets/pic2.jpg" alt="..."/>
-    </div>
-    <div class="item">
-      <img src="/assets/pic3.jpg" alt="..."/>
-    </div>
+
+    <%  banner_pics.each do |file_name| %>
+      <% img_src = file_name.split('/').last %>
+      <div class="item">
+        <img src=<%= "/assets/home_banner/#{img_src}" %>/>
+      </div>
+    <% end %>
   </div>
 
   <!-- Controls -->
