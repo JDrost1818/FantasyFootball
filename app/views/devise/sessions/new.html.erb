@@ -1,6 +1,6 @@
 <!-- Manages the main image banner on homescreen -->
 <% banner_pics = Dir.glob("#{Rails.root}/app/assets/images/home_banner/*") %>
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-interval="6500" data-pause="">
+<div id="carousel-example-generic" style="min-height: 75vh;" class="carousel slide" data-ride="carousel" data-interval="6500" data-pause="">
   <!-- Indicators -->
   <ol class="carousel-indicators">
     <% banner_pics.length.times do |num| %>
@@ -9,16 +9,16 @@
   </ol>
 
   <!-- Wrapper for slides -->
-  <div class="carousel-inner picture_banner" role="listbox">
+  <div class="carousel-inner picture_banner" role="listbox" style="min-height: 75vh;">
     <% lead_photo = banner_pics.shift %>
     <div class="item active">
-      <img src=<%= "/assets/home_banner/#{lead_photo.split('/').last}" %>/>
+      <img style="min-height: 75vh; min-width: 100%" src=<%= "/assets/home_banner/#{lead_photo.split('/').last}" %>/>
     </div>
 
     <%  banner_pics.each do |file_name| %>
       <% img_src = file_name.split('/').last %>
-      <div class="item">
-        <img src=<%= "/assets/home_banner/#{img_src}" %>/>
+      <div class="item displayed">
+        <img style="min-height: 75vh; min-width: 100%" src=<%= "/assets/home_banner/#{img_src}" %>/>
       </div>
     <% end %>
   </div>
@@ -28,12 +28,57 @@
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
+  <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog pull-right" style="margin-right: 25vh; margin-left: 25vh;">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h2 class="modal-title" id="myModalLabel">Log in</h2>
+        </div> <!-- /.modal-header -->
+
+        <div class="modal-body">
+          <form role="form" class="login-inputs">
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" class="form-control" id="uLogin" placeholder="Login">
+                <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
+              </div>
+            </div> <!-- /.form-group -->
+
+            <div class="form-group">
+              <div class="input-group">
+                <input type="password" class="form-control" id="uPassword" placeholder="Password">
+                <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
+              </div> <!-- /.input-group -->
+            </div> <!-- /.form-group -->
+
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> Remember me
+              </label>
+            </div> <!-- /.checkbox -->
+          </form>
+
+        </div> <!-- /.modal-body -->
+
+        <div class="modal-footer login-inputs">
+          <button class="form-control btn btn-primary">Ok</button>
+
+          <div class="progress">
+            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="100" style="width: 0%;">
+              <span class="sr-only">progress</span>
+            </div>
+          </div>
+        </div> <!-- /.modal-footer -->
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
   <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
 </div>
-
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="custom-table">

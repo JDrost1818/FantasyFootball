@@ -137,5 +137,32 @@ body { padding-top: 60px;
 
 .picture_banner {
 	max-height: 75vh !important;
-	min-height: calc(100vh / 1.777777)
+}
+
+.modal-dialog {
+	width: 400px;
+	top: -58vh;
+	margin-bottom: 100vh;
+}
+.modal-footer {
+	height: 150px;
+}
+.modal-footer .btn {
+	font-weight: bold;
+}
+.modal-footer .progress {
+	display: none;
+	height: 32px;
+}
+.input-group-addon {
+	color: #fff;
+	background: #3276B1;
+}
+.login-inputs {
+	width: 80%;
+}
+img.displayed {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
