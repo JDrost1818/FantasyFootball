@@ -37,40 +37,47 @@
           <h2 class="modal-title" id="myModalLabel">Log in</h2>
         </div> <!-- /.modal-header -->
 
-        <div class="modal-body">
-          <form role="form" class="login-inputs">
-            <div class="form-group">
-              <div class="input-group">
-                <input type="text" class="form-control" id="uLogin" placeholder="Login">
-                <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+          <div class="modal-body row">
+            <div class="custom-table">
+
+              <!-- EMAIL -->
+              <div class="form-group">
+                <div class="col-xs-12">
+                  <%= f.text_field :email, placeholder: 'Email', :id => 'uLogin', :class => 'text_field form-control two_hund v-space' %>
+                </div>
               </div>
-            </div> <!-- /.form-group -->
 
-            <div class="form-group">
-              <div class="input-group">
-                <input type="password" class="form-control" id="uPassword" placeholder="Password">
-                <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
-              </div> <!-- /.input-group -->
-            </div> <!-- /.form-group -->
+              <!-- PASSWORD -->
+              <div class="form-group">
+                <div class="col-md-12">
+                  <%= f.password_field :password, placeholder: 'Password', :class => 'text_field form-control two_hund v-space' %>
+                </div>
+              </div>
 
-            <div class="checkbox">
-              <label>
-                <input type="checkbox"> Remember me
-              </label>
-            </div> <!-- /.checkbox -->
-          </form>
-
-        </div> <!-- /.modal-body -->
-
-        <div class="modal-footer login-inputs">
-          <button class="form-control btn btn-primary">Ok</button>
-
-          <div class="progress">
-            <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="100" style="width: 0%;">
-              <span class="sr-only">progress</span>
             </div>
-          </div>
-        </div> <!-- /.modal-footer -->
+          </div> <!-- /.modal-body -->
+
+          <div class="modal-footer row">
+
+            <div class="form-group" >
+              <div class='col-md-10 col-md-offset-1' style="text-align: center">
+                <%= f.submit 'Log In', :class => 'form-control btn btn-primary' %>
+                <% if devise_mapping.rememberable? -%>
+                    <div class="field">
+                      <%= f.check_box :remember_me%>
+                      <%= f.label :remember_me %>
+                    </div>
+                <% end -%>
+                <div style="margin-left:5px">
+                  <%= render 'devise/shared/links' %>
+                </div>
+              </div>
+            </div>
+          </div><!-- /.modal-footer -->
+        <% end %>
+
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
@@ -80,35 +87,19 @@
   </a>
 </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="custom-table">
-    <div class="form-group">
-      <%= f.label :email, :class => 'control-label col-md-2' %>
-      <div class="col-md-10">
-        <%= f.text_field :email, placeholder: "Email", :class => 'text_field form-control two_hund v-space' %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <%= f.label "Password   ", :class => 'control-label col-md-2' %>
-      <div class="col-md-10">
-        <%= f.password_field :password, placeholder: "Password", :class => 'text_field form-control two_hund v-space' %>
-      </div>
-    </div>
-
-    <div class="form-group"  align="left">
-      <div class='col-md-offset-2 col-md-10'>
-        <%= f.submit "Log In", :class => 'btn btn-primary btn-lg two_hund' %>
-        <% if devise_mapping.rememberable? -%>
-          <div class="field">
-              <%= f.check_box :remember_me %>
-              <%= f.label :remember_me %>
-            </div>
-          <% end -%>
-        <div style="margin-left:5px">
-          <%= render "devise/shared/links" %>
-        </div>
-      </div>
+<!-- I don't like all the style tags, but I am trying to just edit this file and leave everything else the same -->
+<div id="description" style="background: #3e3f3a; color: white">
+  <div class="row" style="margin-left: 25vh; height: 25vh">
+    <div id="col-md-10" style="text-align: left;">
+      <h1>
+        Description
+      </h1>
+      <br/>
+      <p>
+        This was a school project I completed in December of 2014. It is my first attempt at a Ruby on Rails application.
+        It is being displayed how I created it back then with only slight modification to the login page. There are things
+        that I would definitely change, but this is a snapshot of my work as a student.
+      </p>
     </div>
   </div>
-<% end %>
+</div>
