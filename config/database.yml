@@ -5,11 +5,11 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: mysql
-  encoding: utf8
-  reconnect: false
+  adapter: postgresql
+  encoding: unicode
   database: fantasy_football
   pool: 5
+  host: localhost
 
 development:
   <<: *default
