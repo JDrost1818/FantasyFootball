@@ -143,6 +143,8 @@ body { padding-top: 60px;
 	width: 400px;
 	top: -58vh;
 	margin-bottom: 100vh;
+    z-index: 100;
+    overflow: hidden;
 }
 .modal-footer {
 	height: 150px;
